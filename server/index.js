@@ -6,6 +6,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookies = require("cookie-parser");
 const swaggerUi = require("swagger-ui-express");
+const http = require("http");
+const socketIO = require("socket.io");
 
 const app = express();
 app.use(bodyParser.json());
@@ -39,6 +41,20 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(require("./config/swaggerDoc"))
 );
+
+const server = http.createServer(app);
+const io = socketIO(server);
+
+io.on("connection", (socket) => {
+  socket.on("send message", (item) => {
+    const msg = item.name + " : " + item.message;
+    console.log(msg);
+    io.emit("receive message", { name: item.name, message: item.message });
+  });
+  socket.on("disconnect", () => {
+    console.log("User disconnect");
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

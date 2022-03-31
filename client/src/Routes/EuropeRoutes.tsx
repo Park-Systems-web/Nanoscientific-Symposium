@@ -9,6 +9,7 @@ import AdminRoute from "components/Route/AdminRoute";
 import Programs from "pages/common/Programs/Programs";
 import Speakers from "pages/common/Speakers/Speakers";
 import LectureHall from "pages/common/LectureHall/LectureHall";
+import ChatApp from "components/ChatApp/ChatApp";
 
 export default [
   {
@@ -55,5 +56,9 @@ export default [
   {
     path: "/eu/user/forgot-password",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/eu/chat",
+    element: <ChatApp />,
   },
 ];
