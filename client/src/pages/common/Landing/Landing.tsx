@@ -17,6 +17,7 @@ import YoutubeEmbed from "components/YoutubeEmbed/YoutubeEmbed";
 import BackgroundVectorWhite from "components/BackgroundVector/BackgroundVectorWhite";
 import BackgroundVectorColored from "components/BackgroundVector/BackgroundVectorColored";
 import BackgroundVectorColoredReversed from "components/BackgroundVector/BackgroundVectorColoredReversed";
+// import { LiveChatWidget } from "@livechat/widget-react";
 import { SpeakersContainer } from "../Speakers/SpeakersStyles";
 
 const Landing = () => {
@@ -456,6 +457,7 @@ const Landing = () => {
           See privacy policy
         </a>
       </CookieConsent>
+      {/* <LiveChatWidget license="13874505" group="0" /> */}
     </>
   );
 };
