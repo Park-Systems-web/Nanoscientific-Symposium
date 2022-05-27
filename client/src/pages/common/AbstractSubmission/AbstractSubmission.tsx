@@ -64,35 +64,36 @@ const AbstractSubmission = ({ formNo }: abstractProps) => {
       return false;
     });
     try {
-      // DB에 저장
-      const res = await axios.post("/api/abstract", {
-        nation: pathname,
-        abstract_title: psAbstractTitle,
-        salutation: Salutation,
-        first_name: FirstName,
-        last_name: LastName,
-        institution: Company,
-        department: Department,
-        email: Email,
-        phone: Phone,
-        country: Country,
-        state: State,
-        application: psApplications,
-        afm_model: psExistingAFMBrand,
-        presentation_form: psPresentationForm,
-        pdf_file_path: filePath,
-      });
+      if (mktoForm.validate()) {
+        // DB에 저장
+        const res = await axios.post("/api/abstract", {
+          nation: pathname,
+          abstract_title: psAbstractTitle,
+          salutation: Salutation,
+          first_name: FirstName,
+          last_name: LastName,
+          institution: Company,
+          department: Department,
+          email: Email,
+          phone: Phone,
+          country: Country,
+          state: State,
+          application: psApplications,
+          afm_model: psExistingAFMBrand,
+          presentation_form: psPresentationForm,
+          pdf_file_path: filePath,
+        });
 
-      // 메일 전송
-      const res2 = await axios.post("/api/mail/abstract", {
-        email: configState.alert_receive_email,
-        attachment: filePath,
-        title: psAbstractTitle,
-        nation: pathname,
-        presentationForm: psPresentationForm,
-      });
-
-      setSubmitSuccess(true);
+        // 메일 전송
+        const res2 = await axios.post("/api/mail/abstract", {
+          email: configState.alert_receive_email,
+          attachment: filePath,
+          title: psAbstractTitle,
+          nation: pathname,
+          presentationForm: psPresentationForm,
+        });
+        setSubmitSuccess(true);
+      }
     } catch (err) {
       alert(err);
     } finally {
