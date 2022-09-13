@@ -72,6 +72,65 @@ const EuropeRegistration = () => {
     setStage(2);
   };
 
+  const regTestHandler = async () => {
+    // snackBar?
+
+    const formData =
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      window.MktoForms2.allForms()[
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        window.MktoForms2.allForms().length - 1
+      ].getValues();
+    try {
+      // user db submit
+      const regResponse = await axios.post("/api/users/register", {
+        title: formData.Salutation,
+        firstName: formData.FirstName,
+        lastName: formData.LastName,
+        email: formData.Email,
+        phone: formData.Phone,
+        institute: formData.Company,
+        department: formData.Department,
+        country: formData.Country,
+        state: formData.State,
+        nation,
+        isStudent,
+      });
+
+      // marketo submit
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      window.MktoForms2.allForms()
+        [
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          window.MktoForms2.allForms().length - 1
+        ].submit()
+        .onSuccess(() => {
+          return false;
+        });
+      try {
+        const res = await axios.post("/api/users/login", {
+          nation,
+          email: formData.Email,
+          password: null,
+        });
+        if (res.data.success) {
+          dispatchLogin(formData.Email, res.data.role, res.data.accessToken);
+        }
+        navigate(`/${nation}/user/reset-password`);
+      } catch (err) {
+        console.log(err);
+        alert("login failed");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("error: saving user data. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     document.body.appendChild(script);
@@ -324,6 +383,30 @@ const EuropeRegistration = () => {
                 CHECKOUT
               </NSSButton>
             )}
+            <NSSButton
+              variant="gradient"
+              className="mktoButton2"
+              onClick={() => {
+                if (
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  !window.MktoForms2.allForms()[
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    window.MktoForms2.allForms().length - 1
+                  ]?.validate()
+                ) {
+                  // 마케토 validator가 알려줌
+                } else if (emailValid !== 1) {
+                  setEmailNotValidAlert(true);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                  regTestHandler();
+                }
+              }}
+            >
+              REG TEST
+            </NSSButton>
             {checkout && (
               <div className="paypal-container">
                 <PayPalScriptProvider
@@ -397,7 +480,6 @@ const EuropeRegistration = () => {
                                 window.MktoForms2.allForms().length - 1
                               ].submit()
                               .onSuccess(() => {
-                                console.log("mkto success");
                                 return false;
                               });
                             try {
