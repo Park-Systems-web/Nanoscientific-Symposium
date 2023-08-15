@@ -27,11 +27,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Park-Systems-web/Nanoscientific-Symposium">
-    <img src="https://user-images.githubusercontent.com/69495129/155484114-6bc84661-b05f-4dd1-bd14-9e3e191f9266.png" alt="Logo" width="400" height="80">
-  </a>
-
-  <h3 align="center">🌎NanoScientific 2022🌎</h3>
+  <h3 align="center">🌎NanoScientific🌎</h3>
   <a href="https://event.nanoscientific.org/"><strong>Explore Site Right Now ❗️ ❕ </strong></a>
   <p align="center">
     for global nanoscientific website 
