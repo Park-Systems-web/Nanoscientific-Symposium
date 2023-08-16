@@ -270,6 +270,10 @@ router.post("/passwordset/check", usersCtrl.checkPasswordSet);
 router.post("/register", usersCtrl.register);
 router.delete("/unregister", usersCtrl.unregister);
 
+// 유럽용
+router.post("/register/temp", usersCtrl.tempRegister);
+router.delete("/unregister/temp", usersCtrl.tempUnregister);
+
 router.post("/updateAnnouncementCache", usersCtrl.updateAnnouncementCache);
 router.get("/isNewData", usersCtrl.getDataIsNewAnnoucnement);
 

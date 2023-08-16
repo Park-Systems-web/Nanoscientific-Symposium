@@ -523,7 +523,7 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
                 <NSSButton
                   variant="gradient"
                   className="mktoButton2"
-                  onClick={() => {
+                  onClick={async () => {
                     if (
                       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                       // @ts-ignore
@@ -539,6 +539,33 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     } else {
                       setCheckout(true);
+                      const formData =
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
+                        window.MktoForms2.allForms()[
+                          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                          // @ts-ignore
+                          window.MktoForms2.allForms().length - 1
+                        ].getValues();
+
+                      try {
+                        await axios.post("/api/users/register/temp", {
+                          title: formData.Salutation,
+                          firstName: formData.FirstName,
+                          lastName: formData.LastName,
+                          email: formData.Email,
+                          phone: formData.Phone,
+                          institute: formData.Company,
+                          department: formData.Department,
+                          country: formData.Country,
+                          state: formData.State,
+                          nation,
+                          isStudent,
+                          year: currentYear,
+                        });
+                      } catch (err) {
+                        console.log(err);
+                      }
                     }
                   }}
                 >
@@ -643,6 +670,22 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
                                   res.data.accessToken,
                                 );
                               }
+
+                              try {
+                                await axios.delete(
+                                  "/api/users/unregister/temp",
+                                  {
+                                    params: {
+                                      nation: pathname,
+                                      email: formData.Email,
+                                      year: currentYear,
+                                    },
+                                  },
+                                );
+                              } catch (err) {
+                                console.log(err);
+                              }
+
                               navigate(
                                 `/${nation}/${currentYear}/user/reset-password`,
                               );

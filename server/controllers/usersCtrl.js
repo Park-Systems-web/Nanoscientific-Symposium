@@ -507,6 +507,96 @@ const usersCtrl = {
     }
   },
 
+  // 임시 회원가입 (유럽용)
+  tempRegister: async (req, res) => {
+    const {
+      title,
+      firstName,
+      lastName,
+      email,
+      phone,
+      institute,
+      department,
+      country,
+      nation,
+      isStudent,
+      year,
+    } = req.body;
+
+    const currentPool = getCurrentPool(nation);
+    const connection = await currentPool.getConnection(async (conn) => conn);
+
+    try {
+      let sql;
+      sql = `INSERT INTO user_temp(
+            title,
+            first_name,
+            last_name,
+            email,
+            password,
+            phone,
+            institute,
+            department,
+            country,
+            is_student,
+            year)
+          VALUES(
+            '${title}',
+            '${firstName}',
+            '${lastName}',
+            '${email}',
+            '${hasher.HashPassword(null)}',
+            '${phone}',
+            '${institute}',
+            '${department}',
+            '${country}',
+            ${isStudent ? 1 : 0},
+            '${year}'
+          )
+          `;
+
+      const result = await connection.query(sql);
+
+      res.status(200).json({
+        success: true,
+        id: result[0].insertId,
+        message: "Success",
+      });
+
+      await connection.commit();
+      connection.release();
+    } catch (err) {
+      connection.release();
+      res.status(500).json({
+        success: false,
+        err,
+        message: "Failed",
+      });
+    }
+  },
+
+  tempUnregister: async (req, res) => {
+    const { nation, email, year } = req.query;
+
+    const currentPool = getCurrentPool(nation);
+    const connection = await currentPool.getConnection(async (conn) => conn);
+
+    try {
+      const sql = `DELETE FROM user_temp WHERE email='${email}' AND year='${year}'`;
+
+      await connection.query(sql);
+
+      res.status(200).json({
+        success: true,
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        err,
+      });
+    }
+  },
+
   updateAnnouncementCache: async (req, res) => {
     const { nation, year, flag, email } = req.body;
     const currentPool = getCurrentPool(nation);
