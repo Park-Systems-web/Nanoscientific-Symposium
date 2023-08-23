@@ -87,7 +87,7 @@ const EventLanding = () => {
                   </Typography>
                 </Stack>
                 <YoutubeEmbed
-                  url="https://www.youtube.com/watch?v=iftyMhdjcUk"
+                  url={`https://www.youtube.com/watch?v=${teaserVideoEmbed}`}
                   width="580"
                   height="360"
                 />

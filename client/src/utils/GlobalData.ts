@@ -58,7 +58,7 @@ export const globalData = new Map<string, Common.globalDataType>([
       ],
       logoURL: `${S3_URL}/common/landing/2023_NSS_Logo.png`,
       teaserVideoURL: `${S3_URL}/common/2022NSS_Teaser_v1.0_LQ.mp4`,
-      teaserVideoEmbed: "R9vwS37g9SU",
+      teaserVideoEmbed: "088jBNFrOvU",
       bannerLogoURL: `${S3_URL}/common/NSS_logo_white_main.svg`,
       eventLandingMainBannerURL: `${S3_URL}/common/landing/Main_Banner.jpg?v=0.1`,
       eventLandingMainBannerMobileURL: `${S3_URL}/common/landing/2023NSS_Mobile_Banner.jpg?v=0.1`,
