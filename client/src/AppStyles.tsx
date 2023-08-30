@@ -99,6 +99,14 @@ export const AppContainer = styled.div`
     a {
       padding: 0;
     }
+
+    .landing-teaser {
+      width: 500px;
+      height: 281px;
+      float: right;
+      transform: translateY(-60px);
+      margin-left: 30px;
+    }
   }
 
   .body-fit {
@@ -149,7 +157,7 @@ export const AppContainer = styled.div`
     font-size: 0.8rem;
   }
 
-  @media screen and (min-width: 0px) {
+  @media screen and (max-width: 1199px) {
     .banner {
       height: 195px;
     }
@@ -159,6 +167,16 @@ export const AppContainer = styled.div`
 
     a {
       padding: 10px 5px;
+    }
+
+    .editor-content {
+      .landing-teaser {
+        width: 100%;
+        float: none;
+        transform: none;
+        margin-left: 0;
+        margin-bottom: 20px;
+      }
     }
   }
   @media screen and (min-width: 1200px) {

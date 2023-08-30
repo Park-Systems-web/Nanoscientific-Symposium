@@ -177,6 +177,8 @@ const Landing = () => {
     useState<string>("");
   const [landing2DescPreview, setLanding2DescPreview] =
     useState<boolean>(false);
+  // teaser url
+  const [teaserID, setTeaserID] = useState<string>("");
   //
   const [landing3TitleEdit, setLanding3TitleEdit] = useState<boolean>(false);
   const [landing3TitlePreviewContent, setLanding3TitlePreviewContent] =
@@ -290,6 +292,7 @@ const Landing = () => {
       });
       setLanding2Desc(res.data.result[0].description);
       setLanding2DescCpy(res.data.result[0].description);
+      setTeaserID(res.data.result[0].teaser);
     } catch (err) {
       console.log(err);
     }
@@ -806,6 +809,7 @@ const Landing = () => {
                     sx={{
                       fontSize: smallFontSize,
                     }}
+                    embedURL={teaserID}
                   >
                     {landing2Desc || ""}
                   </LandingTextEditor>

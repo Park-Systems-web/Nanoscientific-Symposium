@@ -28,6 +28,7 @@ interface landingTextEditor extends ComponentPropsWithoutRef<"div"> {
   setPreviewContent?: React.Dispatch<React.SetStateAction<string>>;
   sx?: SxProps<Theme>;
   applyHandler?: () => void;
+  embedURL?: string;
 }
 
 const LandingTextEditor = ({
@@ -42,6 +43,7 @@ const LandingTextEditor = ({
   setPreviewContent,
   sx = {},
   applyHandler,
+  embedURL,
   ...rest
 }: landingTextEditor) => {
   const authState = useAuthState();
@@ -107,7 +109,19 @@ const LandingTextEditor = ({
               </Box>
             </>
           ) : (
-            <InnerHTML html={rest.children.toString()} />
+            <>
+              {embedURL && (
+                <iframe
+                  className="landing-teaser"
+                  src={`https://www.youtube.com/embed/${embedURL}?autoplay=1&mute=1&playsinline=1`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              )}
+              <InnerHTML html={rest.children.toString()} />
+            </>
           )}
         </Box>
       )}

@@ -676,7 +676,8 @@ const commonCtrl = {
       const sql = `
     SELECT ${
       language === "china" ? "description" : "description_en"
-    } as description
+    } as description,
+    teaser
     FROM landing_section_2 
     WHERE year${year && year != "2022" ? `=${year}` : ` IS NULL`};
     `;
