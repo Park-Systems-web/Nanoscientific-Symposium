@@ -1,6 +1,10 @@
 /* eslint-disable react/require-default-props */
 import React, { useEffect, useState } from "react";
-import { dateToLocaleString } from "utils/Date";
+import {
+  calTimezoneDate,
+  dateToLocaleString,
+  userTimezoneToUTC,
+} from "utils/Date";
 import InnerHTML from "dangerously-set-html-content";
 import {
   styled,
@@ -21,13 +25,15 @@ import usePageViews from "hooks/usePageViews";
 import useCurrentYear from "hooks/useCurrentYear";
 import useAdminStore from "store/AdminStore";
 import { mainFontSize } from "utils/FontSize";
+import dayjs from "dayjs";
 
 interface ProgramContentProps extends Program.programType {
   id: number;
   index: number;
   isAdmin: boolean;
   onClick?: () => void;
-  selectedTimezone: string;
+  selectedTimezone?: string;
+  selectedTimeZoneOffset?: string;
   selectedAgenda?: Program.programAgendaType;
   setSelectedAgenda?: React.Dispatch<Program.programAgendaType>;
   setOpenAgendaForm?: React.Dispatch<boolean>;
@@ -53,6 +59,7 @@ const ProgramContent = ({
   isAdmin,
   onClick,
   selectedTimezone,
+  selectedTimeZoneOffset,
   selectedAgenda,
   setSelectedAgenda,
   setOpenAgendaForm,
@@ -74,6 +81,30 @@ const ProgramContent = ({
     nation === "china" && currentLanguage === "english"
       ? description_en
       : description;
+
+  // time
+  const startTime = calTimezoneDate(
+    userTimezoneToUTC(dayjs(start_time), new Date().getTimezoneOffset()),
+    selectedTimeZoneOffset,
+  );
+  const startHH =
+    startTime.get("hour") < 10
+      ? `0${startTime.get("hour")}`
+      : startTime.get("hour");
+  const startMM =
+    startTime.get("minutes") < 10
+      ? `0${startTime.get("minutes")}`
+      : startTime.get("minutes");
+  const endTime = calTimezoneDate(
+    userTimezoneToUTC(dayjs(end_time), new Date().getTimezoneOffset()),
+    selectedTimeZoneOffset,
+  );
+  const endHH =
+    endTime.get("hour") < 10 ? `0${endTime.get("hour")}` : endTime.get("hour");
+  const endMM =
+    endTime.get("minutes") < 10
+      ? `0${endTime.get("minutes")}`
+      : endTime.get("minutes");
 
   // 아젠다 edit 여부 포함된 리스트
 
@@ -237,8 +268,7 @@ const ProgramContent = ({
             fontSize={mainFontSize}
             fontWeight={theme.typography.fontWeightMedium}
           >
-            {dateToLocaleString(start_time, selectedTimezone, "HH:mm")} -{" "}
-            {dateToLocaleString(end_time, selectedTimezone, "HH:mm")}
+            {`${startHH}:${startMM} - ${endHH}:${endMM}`}
           </Typography>
         </StyledTableCell>
         <StyledTableCell

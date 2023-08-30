@@ -227,6 +227,7 @@ const AdminPrograms = () => {
                 <ProgramTitle
                   title={session.session_title}
                   timezone={selectedTimezone}
+                  selectedTimeZoneOffset={selectedTimeZoneOffset}
                   date={session.date}
                   isAdmin
                   onClick={() => {
@@ -253,6 +254,7 @@ const AdminPrograms = () => {
                         .map((program, index) => (
                           <ProgramContent
                             selectedTimezone={selectedTimezone}
+                            selectedTimeZoneOffset={selectedTimeZoneOffset}
                             isAdmin
                             key={program.id}
                             {...program}

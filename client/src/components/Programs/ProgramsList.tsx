@@ -36,6 +36,14 @@ const ProgramsList = () => {
   const [selectedTimezone, setSelectedTimezone] = useState(
     Intl.DateTimeFormat().resolvedOptions().timeZone,
   );
+  const [selectedTimeZoneOffset, setSelectedTimeZoneOffset] = useState<string>(
+    new Date()
+      .toLocaleString("sv-SE", {
+        timeZone: selectedTimezone,
+        timeZoneName: "short",
+      })
+      .split("GMT")[1],
+  );
   const { programFileLink } = globalData.get(nssType) as Common.globalDataType;
   const config = {
     params: {
@@ -77,6 +85,12 @@ const ProgramsList = () => {
           value={selectedTimezone}
           onChange={(e) => {
             setSelectedTimezone(e.value);
+            setSelectedTimeZoneOffset(
+              e.label.substring(
+                e.label.indexOf("GMT") + 3,
+                e.label.indexOf(")"),
+              ),
+            );
           }}
         />
         {((currentMenu &&
@@ -94,6 +108,7 @@ const ProgramsList = () => {
                 <ProgramTitle
                   title={session.session_title}
                   timezone={selectedTimezone}
+                  selectedTimeZoneOffset={selectedTimeZoneOffset}
                   date={session.date}
                 />
                 <div className="program-table-container">
@@ -114,6 +129,7 @@ const ProgramsList = () => {
                         .map((program, index) => (
                           <ProgramContent
                             selectedTimezone={selectedTimezone}
+                            selectedTimeZoneOffset={selectedTimeZoneOffset}
                             isAdmin={false}
                             key={program.id}
                             {...program}

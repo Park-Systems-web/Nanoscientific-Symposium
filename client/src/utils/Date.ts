@@ -122,7 +122,7 @@ export const calTimezoneDate = (
   const splitted = timeZoneOffset.split(":");
   offset = (isMinus ? -1 * Number(splitted[0]) : Number(splitted[0])) * 60;
   if (splitted.length === 2) {
-    offset += Number(`${splitted[0][0]}${splitted[1]}`);
+    offset += offset > 0 ? Number(splitted[1]) : Number(splitted[1]) * -1;
   }
 
   return time.add(offset, "minute");

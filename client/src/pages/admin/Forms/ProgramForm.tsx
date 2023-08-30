@@ -61,6 +61,8 @@ const ProgramForm = ({
   selectedTimeZoneOffset,
   edit = false,
 }: ProgramFormProps) => {
+  console.log(dayjs(selectedProgram.start_time));
+
   const [startTime, setStartTime] = useState<Dayjs | null>(
     edit
       ? calTimezoneDate(
