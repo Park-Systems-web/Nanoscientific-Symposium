@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   width: 100%;
+  max-width: 1920px;
   padding: 10px 0;
   background-color: ${() => {
     const theme = useTheme();
