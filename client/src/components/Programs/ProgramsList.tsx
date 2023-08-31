@@ -14,6 +14,7 @@ import NSSButton from "components/Button/NSSButton";
 import useNSSType from "hooks/useNSSType";
 import useCurrentYear from "hooks/useCurrentYear";
 import useAdminStore from "store/AdminStore";
+import dayjs from "dayjs";
 import {
   ProgramsListContainer,
   StyledTimezoneSelect,
@@ -100,6 +101,19 @@ const ProgramsList = () => {
         {((currentMenu && currentMenu.is_published === 1) ||
           editorRole.includes(authState.role)) &&
           sessions.map((session) => {
+            const filteredPrograms = programs
+              .filter((program) => {
+                return program.session === session.id;
+              })
+              .sort((a, b) => {
+                // eslint-disable-next-line no-nested-ternary
+                return dayjs(a.start_time).isAfter(dayjs(b.start_time))
+                  ? 1
+                  : a.id > b.id
+                  ? 1
+                  : -1;
+              });
+
             return (
               <TableContainer
                 key={session.id}
@@ -122,20 +136,26 @@ const ProgramsList = () => {
                     }}
                   >
                     <TableBody>
-                      {programs
-                        .filter((program) => {
-                          return program.session === session.id;
-                        })
-                        .map((program, index) => (
+                      {filteredPrograms.map((program, index) => {
+                        return (
                           <ProgramContent
                             selectedTimezone={selectedTimezone}
                             selectedTimeZoneOffset={selectedTimeZoneOffset}
                             isAdmin={false}
                             key={program.id}
+                            nextProgram={
+                              index === filteredPrograms.length - 1
+                                ? null
+                                : filteredPrograms[index + 1]
+                            }
+                            prevProgram={
+                              index === 0 ? null : filteredPrograms[index - 1]
+                            }
                             {...program}
                             index={index}
                           />
-                        ))}
+                        );
+                      })}
                     </TableBody>
                   </Table>
                 </div>

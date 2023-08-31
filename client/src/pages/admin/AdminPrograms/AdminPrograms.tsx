@@ -16,6 +16,7 @@ import { useAuthState } from "context/AuthContext";
 import usePageViews from "hooks/usePageViews";
 import useCurrentYear from "hooks/useCurrentYear";
 import { Table, TableContainer, TableBody } from "@mui/material";
+import dayjs from "dayjs";
 import { AdminProgramsContainer } from "./AdminProgramsStyles";
 import AgendaForm from "../Forms/AgendaForm";
 
@@ -219,6 +220,19 @@ const AdminPrograms = () => {
             }}
           />
           {sessions.map((session) => {
+            const filteredPrograms = programs
+              .filter((program) => {
+                return program.session === session.id;
+              })
+              .sort((a, b) => {
+                // eslint-disable-next-line no-nested-ternary
+                return dayjs(a.start_time).isAfter(dayjs(b.start_time))
+                  ? 1
+                  : a.id > b.id
+                  ? 1
+                  : -1;
+              });
+
             return (
               <TableContainer
                 key={session.id}
@@ -247,7 +261,7 @@ const AdminPrograms = () => {
                     }}
                   >
                     <TableBody>
-                      {programs
+                      {filteredPrograms
                         .filter((program) => {
                           return program.session === session.id;
                         })
@@ -257,6 +271,14 @@ const AdminPrograms = () => {
                             selectedTimeZoneOffset={selectedTimeZoneOffset}
                             isAdmin
                             key={program.id}
+                            nextProgram={
+                              index === filteredPrograms.length - 1
+                                ? null
+                                : filteredPrograms[index + 1]
+                            }
+                            prevProgram={
+                              index === 0 ? null : filteredPrograms[index - 1]
+                            }
                             {...program}
                             index={index}
                             onClick={() => {

@@ -31,6 +31,8 @@ interface ProgramContentProps extends Program.programType {
   id: number;
   index: number;
   isAdmin: boolean;
+  nextProgram: Program.programType | null;
+  prevProgram: Program.programType | null;
   onClick?: () => void;
   selectedTimezone?: string;
   selectedTimeZoneOffset?: string;
@@ -56,6 +58,8 @@ const ProgramContent = ({
   description,
   description_en,
   index,
+  nextProgram,
+  prevProgram,
   isAdmin,
   onClick,
   selectedTimezone,
@@ -106,6 +110,53 @@ const ProgramContent = ({
       ? `0${endTime.get("minutes")}`
       : endTime.get("minutes");
 
+  // 다음 program과 시간 같은 지 여부
+  // const nextStartTime = calTimezoneDate(
+  //   userTimezoneToUTC(
+  //     dayjs(nextProgram.start_time),
+  //     new Date().getTimezoneOffset(),
+  //   ),
+  //   selectedTimeZoneOffset,
+  // );
+  // const nextEndTime = calTimezoneDate(
+  //   userTimezoneToUTC(
+  //     dayjs(nextProgram.end_time),
+  //     new Date().getTimezoneOffset(),
+  //   ),
+  //   selectedTimeZoneOffset,
+  // );
+  let isNextParallel = false;
+  let isPrevParallel = false;
+  let nextSpeaker = null;
+  let nextTitle = null;
+  let nextDescription = null;
+
+  if (nextProgram) {
+    const nextStartTime = dayjs(nextProgram.start_time);
+    const nextEndTime = dayjs(nextProgram.end_time);
+    isNextParallel =
+      startTime.isSame(nextStartTime, "m") && endTime.isSame(nextEndTime, "m");
+
+    nextSpeaker =
+      nation === "china" && currentLanguage === "english"
+        ? nextProgram.speakers_en
+        : nextProgram.speakers;
+    nextTitle =
+      nation === "china" && currentLanguage === "english"
+        ? nextProgram.title_en
+        : nextProgram.title;
+    nextDescription =
+      nation === "china" && currentLanguage === "english"
+        ? nextProgram.description_en
+        : nextProgram.description;
+  }
+  if (prevProgram) {
+    const prevStartTime = dayjs(prevProgram.start_time);
+    const prevEndTime = dayjs(prevProgram.end_time);
+    isPrevParallel =
+      startTime.isSame(prevStartTime, "m") && endTime.isSame(prevEndTime, "m");
+  }
+
   // 아젠다 edit 여부 포함된 리스트
 
   const [agendaEditList, setAgendaEditList] = useState<programAgendaEditType[]>(
@@ -117,16 +168,20 @@ const ProgramContent = ({
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.black,
+    "&.parallel": {
+      cursor: "default",
+    },
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    visibility: !isAdmin && isPrevParallel ? "hidden" : "visible",
     cursor: isAdmin ? "pointer" : "default",
     td: {
       // lineHeight: "2.2",
       padding: "6px 20px",
     },
     transition: "all 0.2s ease-in-out",
-    opacity: "1.0",
+    opacity: isAdmin && isPrevParallel ? "0.3" : "1.0",
     ".speaker-text": {
       color: "#14b1e7",
     },
@@ -154,10 +209,12 @@ const ProgramContent = ({
         backgroundColor: "#ececec",
       },
     },
-
     // admin
     "&.admin": {
-      transition: "all 0.2s ease-in-out",
+      transition: "all 0.2s ease",
+    },
+    "&.admin:hover": {
+      opacity: "0.7",
     },
     ".agenda-move-section": {
       padding: "6px 20px",
@@ -256,23 +313,67 @@ const ProgramContent = ({
   };
 
   return (
-    <>
-      <StyledTableRow
-        className={`program-row${isAdmin ? " admin" : ""}${
-          reorderLoading ? " disabled" : ""
-        }`}
+    <StyledTableRow
+      className={`program-row${isAdmin ? " admin" : ""}${
+        reorderLoading ? " disabled" : ""
+      }`}
+    >
+      <StyledTableCell className="time-col" align="center" width="134px">
+        <Typography
+          fontSize={mainFontSize}
+          fontWeight={theme.typography.fontWeightMedium}
+        >
+          {`${startHH}:${startMM} - ${endHH}:${endMM}`}
+        </Typography>
+      </StyledTableCell>
+      <StyledTableCell
+        className={`title-col${emphasize ? " emphasize" : ""}`}
+        align="left"
+        colSpan={isNextParallel ? 1 : 2}
         onClick={onClick}
       >
-        <StyledTableCell className="time-col" align="center" width="134px">
+        {speakers && (
           <Typography
+            component="span"
+            className="speaker-text title"
             fontSize={mainFontSize}
             fontWeight={theme.typography.fontWeightMedium}
           >
-            {`${startHH}:${startMM} - ${endHH}:${endMM}`}
+            {curSpeaker}
           </Typography>
-        </StyledTableCell>
+        )}
+        {speakers && title && (
+          <Typography
+            component="span"
+            className="title"
+            fontSize={mainFontSize}
+            fontWeight={theme.typography.fontWeightMedium}
+          >
+            {" "}
+            |{" "}
+          </Typography>
+        )}
+        <Typography
+          component="span"
+          className="title"
+          fontSize={mainFontSize}
+          fontWeight={theme.typography.fontWeightMedium}
+        >
+          {curTitle}
+        </Typography>
+        <br />
+        <Typography
+          component="span"
+          fontSize={mainFontSize}
+          fontWeight={theme.typography.fontWeightMedium}
+          color={theme.palette.grey[600]}
+        >
+          <InnerHTML html={curDescription} />
+        </Typography>
+      </StyledTableCell>
+      {isNextParallel && (
         <StyledTableCell
-          className={`title-col${emphasize ? " emphasize" : ""}`}
+          className={`title-col${emphasize ? " emphasize" : ""} parallel`}
           align="left"
         >
           {speakers && (
@@ -282,7 +383,7 @@ const ProgramContent = ({
               fontSize={mainFontSize}
               fontWeight={theme.typography.fontWeightMedium}
             >
-              {curSpeaker}
+              {nextSpeaker}
             </Typography>
           )}
           {speakers && title && (
@@ -302,7 +403,7 @@ const ProgramContent = ({
             fontSize={mainFontSize}
             fontWeight={theme.typography.fontWeightMedium}
           >
-            {curTitle}
+            {nextTitle}
           </Typography>
           <br />
           <Typography
@@ -311,59 +412,11 @@ const ProgramContent = ({
             fontWeight={theme.typography.fontWeightMedium}
             color={theme.palette.grey[600]}
           >
-            <InnerHTML html={curDescription} />
+            <InnerHTML html={nextDescription} />
           </Typography>
         </StyledTableCell>
-      </StyledTableRow>
-      {agendaEditList
-        .filter((agenda) => agenda.program_id === id)
-        .map((agenda, index) => (
-          <React.Fragment key={agenda.id}>
-            <StyledTableRow
-              className={`agenda-row${isAdmin ? " admin" : ""}${
-                reorderLoading ? " disabled" : ""
-              }`}
-            >
-              {isAdmin && (
-                <StyledTableCell
-                  width="0%"
-                  style={{ padding: 0, border: "none" }}
-                >
-                  <Box
-                    className={`agenda-move-section ${
-                      agendaEditList[index].edit ? " active" : "active"
-                    }`}
-                  >
-                    <IconButton
-                      sx={{ p: "3px" }}
-                      disabled={index === 0}
-                      onClick={() => {
-                        clickUpHandler(agenda, index);
-                      }}
-                    >
-                      <ArrowCircleUp />
-                    </IconButton>
-                    <IconButton
-                      sx={{ p: "3px" }}
-                      disabled={agenda.next_id === 99999}
-                      onClick={() => {
-                        clickDownHandler(agenda, index);
-                      }}
-                    >
-                      <ArrowCircleDown />
-                    </IconButton>
-                  </Box>
-                </StyledTableCell>
-              )}
-
-              <StyledTableCell align="center" width="15%" />
-              <StyledTableCell align="left" width="50%">
-                <li style={{ listStyle: "square" }}>{agenda.title}</li>
-              </StyledTableCell>
-            </StyledTableRow>
-          </React.Fragment>
-        ))}
-    </>
+      )}
+    </StyledTableRow>
   );
 };
 
