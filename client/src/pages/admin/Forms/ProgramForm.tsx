@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   FormControl,
@@ -27,7 +26,6 @@ import usePageViews from "hooks/usePageViews";
 import useCurrentYear from "hooks/useCurrentYear";
 import {
   calTimezoneDate,
-  calTimezoneDateEurope,
   getUserTimezoneDate,
   getUserTimezoneString,
   isDateStringValid,
@@ -63,45 +61,26 @@ const ProgramForm = ({
   selectedTimeZoneOffset,
   edit = false,
 }: ProgramFormProps) => {
-  const pathname = usePageViews();
-  const currentYear = useCurrentYear();
-
   const [startTime, setStartTime] = useState<Dayjs | null>(
     edit
-      ? pathname !== "eu"
-        ? calTimezoneDate(
-            userTimezoneToUTC(
-              dayjs(selectedProgram.start_time),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
-        : calTimezoneDateEurope(
-            userTimezoneToUTC(
-              dayjs(selectedProgram.start_time),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
+      ? calTimezoneDate(
+          userTimezoneToUTC(
+            dayjs(selectedProgram.start_time),
+            new Date().getTimezoneOffset(),
+          ),
+          selectedTimeZoneOffset,
+        )
       : dayjs(sessions[0].date),
   );
   const [endTime, setEndTime] = useState<Dayjs | null>(
     edit
-      ? pathname !== "eu"
-        ? calTimezoneDate(
-            userTimezoneToUTC(
-              dayjs(selectedProgram.end_time),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
-        : calTimezoneDateEurope(
-            userTimezoneToUTC(
-              dayjs(selectedProgram.end_time),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
+      ? calTimezoneDate(
+          userTimezoneToUTC(
+            dayjs(selectedProgram.end_time),
+            new Date().getTimezoneOffset(),
+          ),
+          selectedTimeZoneOffset,
+        )
       : dayjs(sessions[0].date),
   );
   const [emphasizeCheck, setEmphasizeCheck] = useState<boolean>(
@@ -113,6 +92,9 @@ const ProgramForm = ({
 
   const [loading, setLoading] = useState<boolean>(false);
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+
+  const pathname = usePageViews();
+  const currentYear = useCurrentYear();
 
   const programSubmitHandler = async () => {
     if (!startTime || !endTime || !startTime.isValid() || !endTime.isValid()) {
@@ -129,26 +111,16 @@ const ProgramForm = ({
         title: escapeQuotes(title.value),
         speakers: escapeQuotes(speakers.value),
         description: escapeQuotes(description.value),
-        startTime:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(startTime), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(
-                dayjs(startTime),
-                selectedTimeZoneOffset,
-                true,
-              )
-                .toDate()
-                .toLocaleString("sv-SE"),
-        endTime:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(endTime), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(
-                dayjs(endTime),
-                selectedTimeZoneOffset,
-                true,
-              )
-                .toDate()
-                .toLocaleString("sv-SE"),
+        startTime: calTimezoneDate(
+          dayjs(startTime),
+          selectedTimeZoneOffset,
+          true,
+        )
+          .toDate()
+          .toLocaleString("sv-SE"),
+        endTime: calTimezoneDate(dayjs(endTime), selectedTimeZoneOffset, true)
+          .toDate()
+          .toLocaleString("sv-SE"),
         // startTime: getUserTimezoneString(startTime, "utc"),
         // endTime: getUserTimezoneString(endTime, "utc"),
         session: selectedSession,
@@ -162,26 +134,16 @@ const ProgramForm = ({
         title: escapeQuotes(title.value),
         speakers: escapeQuotes(speakers.value),
         description: escapeQuotes(description.value),
-        startTime:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(startTime), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(
-                dayjs(startTime),
-                selectedTimeZoneOffset,
-                true,
-              )
-                .toDate()
-                .toLocaleString("sv-SE"),
-        endTime:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(endTime), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(
-                dayjs(endTime),
-                selectedTimeZoneOffset,
-                true,
-              )
-                .toDate()
-                .toLocaleString("sv-SE"),
+        startTime: calTimezoneDate(
+          dayjs(startTime),
+          selectedTimeZoneOffset,
+          true,
+        )
+          .toDate()
+          .toLocaleString("sv-SE"),
+        endTime: calTimezoneDate(dayjs(endTime), selectedTimeZoneOffset, true)
+          .toDate()
+          .toLocaleString("sv-SE"),
         // startTime: getUserTimezoneString(startTime, "utc"),
         // endTime: getUserTimezoneString(endTime, "utc"),
         emphasize: emphasizeCheck ? 1 : 0,

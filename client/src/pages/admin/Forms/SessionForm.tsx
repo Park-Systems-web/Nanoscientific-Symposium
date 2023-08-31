@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -12,7 +11,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import {
   calTimezoneDate,
-  calTimezoneDateEurope,
   getUserTimezoneDate,
   isDateValid,
   userTimezoneToUTC,
@@ -60,21 +58,13 @@ const SessionForm = ({
   const [status, setStatus] = useState<Common.showStatus>("show");
   const [date, setDate] = useState<Dayjs | null>(
     edit
-      ? pathname !== "eu"
-        ? calTimezoneDate(
-            userTimezoneToUTC(
-              dayjs(selectedSession.date),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
-        : calTimezoneDateEurope(
-            userTimezoneToUTC(
-              dayjs(selectedSession.date),
-              new Date().getTimezoneOffset(),
-            ),
-            selectedTimeZoneOffset,
-          )
+      ? calTimezoneDate(
+          userTimezoneToUTC(
+            dayjs(selectedSession.date),
+            new Date().getTimezoneOffset(),
+          ),
+          selectedTimeZoneOffset,
+        )
       : dayjs(),
   );
 
@@ -99,12 +89,9 @@ const SessionForm = ({
         title: escapeQuotes(title.value),
         title_en: pathname === "china" ? title_en.value : undefined,
         status: status === "show" ? 1 : 0,
-        date:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(date), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(dayjs(date), selectedTimeZoneOffset, true)
-                .toDate()
-                .toLocaleString("sv-SE"),
+        date: calTimezoneDate(dayjs(date), selectedTimeZoneOffset, true)
+          .toDate()
+          .toLocaleString("sv-SE"),
         year: currentYear,
       });
     } else {
@@ -114,12 +101,9 @@ const SessionForm = ({
         title: escapeQuotes(title.value),
         title_en: pathname === "china" ? title_en.value : undefined,
         language: pathname === "china" ? currentLanguage : undefined,
-        date:
-          pathname !== "eu"
-            ? calTimezoneDate(dayjs(date), selectedTimeZoneOffset, true)
-            : calTimezoneDateEurope(dayjs(date), selectedTimeZoneOffset, true)
-                .toDate()
-                .toLocaleString("sv-SE"),
+        date: calTimezoneDate(dayjs(date), selectedTimeZoneOffset, true)
+          .toDate()
+          .toLocaleString("sv-SE"),
         year: currentYear,
       });
     }

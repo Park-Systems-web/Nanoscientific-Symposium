@@ -127,20 +127,6 @@ export const calTimezoneDate = (
 
   return time.add(offset, "minute");
 };
-export const calTimezoneDateEurope = (
-  time: Dayjs,
-  timeZoneOffset: string,
-  isMinus?: boolean,
-) => {
-  let offset = 0;
-  const splitted = timeZoneOffset.split(":");
-  offset = (isMinus ? -1 * Number(splitted[0]) : Number(splitted[0])) * 60;
-  if (splitted.length === 2) {
-    offset += Number(`${splitted[0][0]}${splitted[1]}`);
-  }
-
-  return time.add(offset, "minute");
-};
 
 export const userTimezoneToUTC = (time: Dayjs, timeZoneOffset: number) => {
   return time.add(timeZoneOffset, "minute");

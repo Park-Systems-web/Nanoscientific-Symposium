@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   calTimezoneDate,
-  calTimezoneDateEurope,
   dateToLocaleString,
   userTimezoneToUTC,
 } from "utils/Date";
@@ -88,16 +87,10 @@ const ProgramContent = ({
       : description;
 
   // time
-  const startTime =
-    nation !== "eu"
-      ? calTimezoneDate(
-          userTimezoneToUTC(dayjs(start_time), new Date().getTimezoneOffset()),
-          selectedTimeZoneOffset,
-        )
-      : calTimezoneDateEurope(
-          userTimezoneToUTC(dayjs(start_time), new Date().getTimezoneOffset()),
-          selectedTimeZoneOffset,
-        );
+  const startTime = calTimezoneDate(
+    userTimezoneToUTC(dayjs(start_time), new Date().getTimezoneOffset()),
+    selectedTimeZoneOffset,
+  );
   const startHH =
     startTime.get("hour") < 10
       ? `0${startTime.get("hour")}`
@@ -106,16 +99,10 @@ const ProgramContent = ({
     startTime.get("minutes") < 10
       ? `0${startTime.get("minutes")}`
       : startTime.get("minutes");
-  const endTime =
-    nation !== "eu"
-      ? calTimezoneDate(
-          userTimezoneToUTC(dayjs(end_time), new Date().getTimezoneOffset()),
-          selectedTimeZoneOffset,
-        )
-      : calTimezoneDateEurope(
-          userTimezoneToUTC(dayjs(end_time), new Date().getTimezoneOffset()),
-          selectedTimeZoneOffset,
-        );
+  const endTime = calTimezoneDate(
+    userTimezoneToUTC(dayjs(end_time), new Date().getTimezoneOffset()),
+    selectedTimeZoneOffset,
+  );
   const endHH =
     endTime.get("hour") < 10 ? `0${endTime.get("hour")}` : endTime.get("hour");
   const endMM =
@@ -123,6 +110,21 @@ const ProgramContent = ({
       ? `0${endTime.get("minutes")}`
       : endTime.get("minutes");
 
+  // 다음 program과 시간 같은 지 여부
+  // const nextStartTime = calTimezoneDate(
+  //   userTimezoneToUTC(
+  //     dayjs(nextProgram.start_time),
+  //     new Date().getTimezoneOffset(),
+  //   ),
+  //   selectedTimeZoneOffset,
+  // );
+  // const nextEndTime = calTimezoneDate(
+  //   userTimezoneToUTC(
+  //     dayjs(nextProgram.end_time),
+  //     new Date().getTimezoneOffset(),
+  //   ),
+  //   selectedTimeZoneOffset,
+  // );
   let isNextParallel = false;
   let isPrevParallel = false;
   let nextSpeaker = null;
