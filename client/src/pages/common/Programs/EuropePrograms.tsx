@@ -19,6 +19,7 @@ const EuropePrograms = () => {
       <img src={`${S3_URL}/eu/program/eu-program-3.png`} alt="" />
       <img src={`${S3_URL}/eu/program/eu-program-4.png`} alt="" />
       <img src={`${S3_URL}/eu/program/eu-program-5.png`} alt="" />
+      <img src={`${S3_URL}/eu/program/eu-program-6.png`} alt="" />
     </Stack>
   );
 };
