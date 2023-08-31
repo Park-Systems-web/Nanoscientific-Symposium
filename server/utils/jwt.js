@@ -62,7 +62,6 @@ module.exports = {
         },
       }
     );
-    console.log(res.data.access_token);
     return res.data.access_token;
   },
 };
