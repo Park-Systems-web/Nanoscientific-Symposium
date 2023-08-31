@@ -15,6 +15,7 @@ import AnnouncementDetail from "pages/common/AnnouncementDetail/AnnouncementDeta
 import AbstractSubmission from "pages/common/AbstractSubmission/AbstractSubmission";
 import PosterHall from "pages/common/PosterHall/PosterHall";
 import EuropeRegistration2023 from "pages/europe/EuropeRegistration/EuropeRegistration2023";
+import EuropePrograms from "pages/common/Programs/EuropePrograms";
 // import Landing2023 from "pages/2023/Landing/Landing2023";
 
 const formNo = "1149";
@@ -32,8 +33,16 @@ yearList.map((y) => {
         element: <Landing key={`${pathname}-landing-section`} />,
       },
       {
-        path: `/${pathname}/program`,
+        path: `/${pathname}/${
+          pathname === "eu/2023" ? "program-old" : "program"
+        }`,
         element: <Programs />,
+      },
+      {
+        path: `/${pathname}/${
+          pathname === "eu/2023" ? "program" : "program-alt"
+        }`,
+        element: <EuropePrograms />,
       },
       {
         path: `/${pathname}/speakers`,
