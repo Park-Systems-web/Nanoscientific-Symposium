@@ -270,39 +270,45 @@ const AdminPrograms = ({ concurrent }: ProgramListProps) => {
                           .filter((program) => {
                             return program.session === session.id;
                           })
-                          .map((program, index) => {
-                            return (
-                              <ProgramContent
-                                selectedTimezone={selectedTimezone}
-                                selectedTimeZoneOffset={selectedTimeZoneOffset}
-                                isAdmin
-                                key={program.id}
-                                {...program}
-                                index={index}
-                              />
-                            );
-                          })}
-                      {concurrent &&
-                        filteredPrograms.map((program, index) => {
-                          return (
+                          .map((program, index) => (
                             <ProgramContent
                               selectedTimezone={selectedTimezone}
                               selectedTimeZoneOffset={selectedTimeZoneOffset}
                               isAdmin
                               key={program.id}
-                              nextProgram={
-                                index === filteredPrograms.length - 1
-                                  ? null
-                                  : filteredPrograms[index + 1]
-                              }
-                              prevProgram={
-                                index === 0 ? null : filteredPrograms[index - 1]
-                              }
                               {...program}
                               index={index}
+                              onClick={() => {
+                                setSelectedProgram(program);
+                                setProgramEdit(true);
+                                setOpenProgramForm(true);
+                              }}
                             />
-                          );
-                        })}
+                          ))}
+                      {concurrent &&
+                        filteredPrograms.map((program, index) => (
+                          <ProgramContent
+                            selectedTimezone={selectedTimezone}
+                            selectedTimeZoneOffset={selectedTimeZoneOffset}
+                            isAdmin
+                            key={program.id}
+                            nextProgram={
+                              index === filteredPrograms.length - 1
+                                ? null
+                                : filteredPrograms[index + 1]
+                            }
+                            prevProgram={
+                              index === 0 ? null : filteredPrograms[index - 1]
+                            }
+                            {...program}
+                            index={index}
+                            onClick={() => {
+                              setSelectedProgram(program);
+                              setProgramEdit(true);
+                              setOpenProgramForm(true);
+                            }}
+                          />
+                        ))}
                     </TableBody>
                   </Table>
                 </div>
