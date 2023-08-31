@@ -7,9 +7,7 @@ const Programs = () => {
   const pathname = usePageViews();
   const currentYear = useCurrentYear();
 
-  return (
-    <ProgramsList concurrent={pathname === "asia" && currentYear === "2022"} />
-  );
+  return <ProgramsList concurrent={pathname === "asia"} />;
 };
 
 export default Programs;

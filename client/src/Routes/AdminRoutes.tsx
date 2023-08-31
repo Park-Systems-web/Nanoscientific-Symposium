@@ -40,7 +40,7 @@ nationList.forEach((n) =>
           path: `${nationYearString}/program`,
           element: (
             <AdminRoute key={`${nationYearString}/program`}>
-              <AdminPrograms />
+              <AdminPrograms concurrent={n === "asia"} />
             </AdminRoute>
           ),
         },

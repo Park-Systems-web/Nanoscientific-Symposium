@@ -20,7 +20,11 @@ import dayjs from "dayjs";
 import { AdminProgramsContainer } from "./AdminProgramsStyles";
 import AgendaForm from "../Forms/AgendaForm";
 
-const AdminPrograms = () => {
+interface ProgramListProps {
+  // eslint-disable-next-line react/require-default-props
+  concurrent?: boolean;
+}
+const AdminPrograms = ({ concurrent }: ProgramListProps) => {
   const authState = useAuthState();
   const pathname = usePageViews();
   const currentYear = useCurrentYear();
@@ -261,33 +265,44 @@ const AdminPrograms = () => {
                     }}
                   >
                     <TableBody>
-                      {filteredPrograms
-                        .filter((program) => {
-                          return program.session === session.id;
-                        })
-                        .map((program, index) => (
-                          <ProgramContent
-                            selectedTimezone={selectedTimezone}
-                            selectedTimeZoneOffset={selectedTimeZoneOffset}
-                            isAdmin
-                            key={program.id}
-                            nextProgram={
-                              index === filteredPrograms.length - 1
-                                ? null
-                                : filteredPrograms[index + 1]
-                            }
-                            prevProgram={
-                              index === 0 ? null : filteredPrograms[index - 1]
-                            }
-                            {...program}
-                            index={index}
-                            onClick={() => {
-                              setSelectedProgram(program);
-                              setProgramEdit(true);
-                              setOpenProgramForm(true);
-                            }}
-                          />
-                        ))}
+                      {!concurrent &&
+                        programs
+                          .filter((program) => {
+                            return program.session === session.id;
+                          })
+                          .map((program, index) => {
+                            return (
+                              <ProgramContent
+                                selectedTimezone={selectedTimezone}
+                                selectedTimeZoneOffset={selectedTimeZoneOffset}
+                                isAdmin
+                                key={program.id}
+                                {...program}
+                                index={index}
+                              />
+                            );
+                          })}
+                      {concurrent &&
+                        filteredPrograms.map((program, index) => {
+                          return (
+                            <ProgramContent
+                              selectedTimezone={selectedTimezone}
+                              selectedTimeZoneOffset={selectedTimeZoneOffset}
+                              isAdmin
+                              key={program.id}
+                              nextProgram={
+                                index === filteredPrograms.length - 1
+                                  ? null
+                                  : filteredPrograms[index + 1]
+                              }
+                              prevProgram={
+                                index === 0 ? null : filteredPrograms[index - 1]
+                              }
+                              {...program}
+                              index={index}
+                            />
+                          );
+                        })}
                     </TableBody>
                   </Table>
                 </div>
