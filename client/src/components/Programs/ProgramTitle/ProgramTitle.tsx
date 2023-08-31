@@ -4,11 +4,13 @@ import { ProgramTitleContainer } from "components/Programs/ProgramTitle/ProgramT
 import { Typography, useTheme } from "@mui/material";
 import {
   calTimezoneDate,
+  calTimezoneDateEurope,
   dateToLocaleString,
   userTimezoneToUTC,
 } from "utils/Date";
 import { mainFontSize } from "utils/FontSize";
 import dayjs from "dayjs";
+import usePageViews from "hooks/usePageViews";
 
 interface ProgramTitleProps {
   title: string;
@@ -30,11 +32,18 @@ const ProgramTitle = ({
   selectedTimeZoneOffset,
 }: ProgramTitleProps) => {
   const theme = useTheme();
+  const nation = usePageViews();
 
-  const dateString = calTimezoneDate(
-    userTimezoneToUTC(dayjs(date), new Date().getTimezoneOffset()),
-    selectedTimeZoneOffset,
-  );
+  const dateString =
+    nation !== "eu"
+      ? calTimezoneDate(
+          userTimezoneToUTC(dayjs(date), new Date().getTimezoneOffset()),
+          selectedTimeZoneOffset,
+        )
+      : calTimezoneDateEurope(
+          userTimezoneToUTC(dayjs(date), new Date().getTimezoneOffset()),
+          selectedTimeZoneOffset,
+        );
   return (
     <ProgramTitleContainer onClick={onClick} isAdmin={isAdmin as boolean}>
       <Typography
