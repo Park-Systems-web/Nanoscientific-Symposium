@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import usePageViews from "hooks/usePageViews";
@@ -23,7 +24,10 @@ import {
 import ProgramContent from "./ProgramContent/ProgramContent";
 import ProgramTitle from "./ProgramTitle/ProgramTitle";
 
-const ProgramsList = () => {
+interface ProgramListProps {
+  concurrent?: boolean;
+}
+const ProgramsList = ({ concurrent }: ProgramListProps) => {
   const { currentMenu } = useMenuStore();
   const { currentLanguage } = useAdminStore();
   const nssType = useNSSType();
@@ -136,26 +140,44 @@ const ProgramsList = () => {
                     }}
                   >
                     <TableBody>
-                      {filteredPrograms.map((program, index) => {
-                        return (
-                          <ProgramContent
-                            selectedTimezone={selectedTimezone}
-                            selectedTimeZoneOffset={selectedTimeZoneOffset}
-                            isAdmin={false}
-                            key={program.id}
-                            nextProgram={
-                              index === filteredPrograms.length - 1
-                                ? null
-                                : filteredPrograms[index + 1]
-                            }
-                            prevProgram={
-                              index === 0 ? null : filteredPrograms[index - 1]
-                            }
-                            {...program}
-                            index={index}
-                          />
-                        );
-                      })}
+                      {!concurrent &&
+                        programs
+                          .filter((program) => {
+                            return program.session === session.id;
+                          })
+                          .map((program, index) => {
+                            return (
+                              <ProgramContent
+                                selectedTimezone={selectedTimezone}
+                                selectedTimeZoneOffset={selectedTimeZoneOffset}
+                                isAdmin={false}
+                                key={program.id}
+                                {...program}
+                                index={index}
+                              />
+                            );
+                          })}
+                      {concurrent &&
+                        filteredPrograms.map((program, index) => {
+                          return (
+                            <ProgramContent
+                              selectedTimezone={selectedTimezone}
+                              selectedTimeZoneOffset={selectedTimeZoneOffset}
+                              isAdmin={false}
+                              key={program.id}
+                              nextProgram={
+                                index === filteredPrograms.length - 1
+                                  ? null
+                                  : filteredPrograms[index + 1]
+                              }
+                              prevProgram={
+                                index === 0 ? null : filteredPrograms[index - 1]
+                              }
+                              {...program}
+                              index={index}
+                            />
+                          );
+                        })}
                     </TableBody>
                   </Table>
                 </div>

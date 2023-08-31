@@ -31,8 +31,8 @@ interface ProgramContentProps extends Program.programType {
   id: number;
   index: number;
   isAdmin: boolean;
-  nextProgram: Program.programType | null;
-  prevProgram: Program.programType | null;
+  nextProgram?: Program.programType | null;
+  prevProgram?: Program.programType | null;
   onClick?: () => void;
   selectedTimezone?: string;
   selectedTimeZoneOffset?: string;
