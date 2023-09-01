@@ -318,7 +318,12 @@ const ProgramContent = ({
         reorderLoading ? " disabled" : ""
       }`}
     >
-      <StyledTableCell className="time-col" align="center" width="134px">
+      <StyledTableCell
+        className="time-col"
+        align="center"
+        width="134px"
+        onClick={onClick}
+      >
         <Typography
           fontSize={mainFontSize}
           fontWeight={theme.typography.fontWeightMedium}
