@@ -86,6 +86,7 @@ const Landing = () => {
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
   ];
 
   const { registration } = globalData.get(nssType) as Common.globalDataType;
@@ -108,6 +109,7 @@ const Landing = () => {
   const [landing6Title, setLanding6Title] = useState<string>("");
   const [landing7Title, setLanding7Title] = useState<string>("");
   const [landing8Title, setLanding8Title] = useState<string>("");
+  const [landing9Title, setLanding9Title] = useState<string>("");
 
   // content
   const [landing2Desc, setLanding2Desc] = useState<string>("");
@@ -137,9 +139,9 @@ const Landing = () => {
     useState<Landing.landing6Type>(null);
   const [openLanding6Modal, setOpenLanding6Modal] = useState<boolean>(false);
   // landing7
-  // const { isSponsorPreview, setIsSponsorPreview } = useAdminStore();
   const [isSponsorPreview, setIsSponsorPreview] = useState<boolean>(false);
   const [isSponsor2Preview, setIsSponsor2Preview] = useState<boolean>(false);
+  const [isSponsor3Preview, setIsSponsor3Preview] = useState<boolean>(false);
   const [previewSponsorList, setPreviewSponsorList] = useState<
     Landing.landing7Type[]
   >([]);
@@ -157,12 +159,24 @@ const Landing = () => {
   >([]);
   const [selectedSponsor2, setSelectedSponsor2] =
     useState<Landing.landing7Type>();
+  // landing9
+  const [previewSponsor3List, setPreviewSponsor3List] = useState<
+    Landing.landing7Type[]
+  >([]);
+  const [landingSection9Sponsors, setLandingSection9Sponsors] = useState<
+    Landing.landing7Type[]
+  >([]);
+  const [selectedSponsor3, setSelectedSponsor3] =
+    useState<Landing.landing7Type>();
 
   const [openSponsorModal, setOpenSponsorModal] = useState<boolean>(false);
   const [editSponsor, setEditSponsor] = useState<boolean>(false);
 
   const [openSponsorModal2, setOpenSponsorModal2] = useState<boolean>(false);
   const [editSponsor2, setEditSponsor2] = useState<boolean>(false);
+
+  const [openSponsorModal3, setOpenSponsorModal3] = useState<boolean>(false);
+  const [editSponsor3, setEditSponsor3] = useState<boolean>(false);
 
   const [openLandingBannerModal, setOpenLandingBannerModal] =
     useState<boolean>(false);
@@ -226,6 +240,12 @@ const Landing = () => {
   const [landing8TitlePreview, setLanding8TitlePreview] =
     useState<boolean>(false);
 
+  const [landing9TitleEdit, setLanding9TitleEdit] = useState<boolean>(false);
+  const [landing9TitlePreviewContent, setLanding9TitlePreviewContent] =
+    useState<string>("");
+  const [landing9TitlePreview, setLanding9TitlePreview] =
+    useState<boolean>(false);
+
   // Loading
   const [stickyApplyLoading, setStickyApplyLoading] = useState<boolean>(false);
   const {
@@ -273,6 +293,7 @@ const Landing = () => {
       setLanding6Title(res.data.result[4].title);
       setLanding7Title(res.data.result[5].title);
       setLanding8Title(res.data.result[6].title);
+      setLanding9Title(res.data.result[7].title);
     } catch (err) {
       console.log(err);
     } finally {
@@ -543,8 +564,49 @@ const Landing = () => {
     setOpenSponsorModal2(true);
   };
   const handleReturnSponsor2 = () => {
-    setIsSponsorPreview(false);
+    setIsSponsor2Preview(false);
     setOpenSponsorModal2(true);
+  };
+  // landing 9 handler
+  const applyLanding9Title = async () => {
+    if (confirm("Are you sure?")) {
+      const result = await axios.post(`/api/page/common/landing/title/9`, {
+        nation: pathname,
+        title: escapeQuotes(landing8Title),
+        language: pathname === "china" ? currentLanguage : undefined,
+        year: currentYear,
+      });
+      setLanding9Title(landing9Title);
+      setLanding9TitleEdit(false);
+    }
+  };
+  const getLandingSection9 = async () => {
+    try {
+      const result = await axios.get(`/api/page/common/landing/9`, {
+        params: {
+          nation: pathname,
+          language: pathname === "china" ? currentLanguage : undefined,
+          year: currentYear,
+        },
+      });
+      setLandingSection9Sponsors(result.data.result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const addSponsorHandler3 = () => {
+    setSelectedSponsor3(null);
+    setEditSponsor3(false);
+    setOpenSponsorModal3(true);
+  };
+  const editSponsorHandler3 = (sponsor: Landing.landing7Type) => {
+    setSelectedSponsor3(sponsor);
+    setEditSponsor3(true);
+    setOpenSponsorModal3(true);
+  };
+  const handleReturnSponsor3 = () => {
+    setIsSponsor3Preview(false);
+    setOpenSponsorModal3(true);
   };
 
   // sticky
@@ -600,6 +662,7 @@ const Landing = () => {
     getLandingSection6();
     getLandingSection7();
     getLandingSection8();
+    getLandingSection9();
   }, []);
 
   if (landingListLoading) {
@@ -1267,6 +1330,7 @@ const Landing = () => {
               </Stack>
             </LandingSection>
           )}
+
           {/* section8 */}
           {landingList[6].show !== 0 && landingSection8Sponsors && (
             <LandingSection fullWidth maxWidth="1920px">
@@ -1296,7 +1360,7 @@ const Landing = () => {
                   >
                     {landing8Title || ""}
                   </LandingTextEditor>
-                  {isSponsorPreview && (
+                  {isSponsor2Preview && (
                     <Button variant="outlined" onClick={handleReturnSponsor2}>
                       Return to editor
                     </Button>
@@ -1313,8 +1377,8 @@ const Landing = () => {
                     },
                   }}
                 >
-                  {isSponsorPreview &&
-                    previewSponsorList.map((sponsor) => (
+                  {isSponsor2Preview &&
+                    previewSponsor2List.map((sponsor) => (
                       <Box>
                         <a
                           className="hover-zoom"
@@ -1337,7 +1401,7 @@ const Landing = () => {
                             }}
                           />
                         </a>
-                        {isEditor && !isSponsorPreview && (
+                        {isEditor && !isSponsor2Preview && (
                           <IconButton
                             component="span"
                             className="sponsor-edit-btn"
@@ -1352,7 +1416,7 @@ const Landing = () => {
                         )}
                       </Box>
                     ))}
-                  {!isSponsorPreview &&
+                  {!isSponsor2Preview &&
                     landingSection8Sponsors.map((sponsor) => (
                       <Box>
                         <a
@@ -1377,7 +1441,7 @@ const Landing = () => {
                             }}
                           />
                         </a>
-                        {isEditor && !isSponsorPreview && (
+                        {isEditor && !isSponsor2Preview && (
                           <IconButton
                             component="span"
                             className="sponsor-edit-btn"
@@ -1393,7 +1457,7 @@ const Landing = () => {
                         )}
                       </Box>
                     ))}
-                  {isEditor && !isSponsorPreview && (
+                  {isEditor && !isSponsor2Preview && (
                     <Stack
                       sx={{
                         width: "110px",
@@ -1403,6 +1467,150 @@ const Landing = () => {
                       alignItems="center"
                     >
                       <IconButton onClick={addSponsorHandler2}>
+                        <AddCircleOutlineIcon color="primary" />
+                      </IconButton>
+                    </Stack>
+                  )}
+                </Stack>
+              </Stack>
+            </LandingSection>
+          )}
+          {/* section9 */}
+          {landingList[7].show !== 0 && landingSection9Sponsors && (
+            <LandingSection fullWidth maxWidth="1920px">
+              <Box ref={landingRefList[7]} />
+              <Stack className="layout">
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <LandingTextEditor
+                    initialValue={landingList[7].title}
+                    value={landing9Title}
+                    setValue={setLanding9Title}
+                    edit={landing9TitleEdit}
+                    setEdit={setLanding9TitleEdit}
+                    preview={landing9TitlePreview}
+                    setPreview={setLanding9TitlePreview}
+                    previewContent={landing9TitlePreviewContent}
+                    setPreviewContent={setLanding9TitlePreviewContent}
+                    applyHandler={applyLanding9Title}
+                    sx={{
+                      mb: 3,
+                      fontSize: headingFontSize,
+                      fontWeight: theme.typography.fontWeightBold,
+                    }}
+                  >
+                    {landing9Title || ""}
+                  </LandingTextEditor>
+                  {isSponsor3Preview && (
+                    <Button variant="outlined" onClick={handleReturnSponsor3}>
+                      Return to editor
+                    </Button>
+                  )}
+                </Stack>
+                <Stack
+                  flexWrap="wrap"
+                  alignItems="center"
+                  sx={{
+                    flexDirection: "row",
+                    justifyContent: {
+                      mobile: "center",
+                      tablet: "flex-start",
+                    },
+                  }}
+                >
+                  {isSponsor3Preview &&
+                    previewSponsor3List.map((sponsor) => (
+                      <Box>
+                        <a
+                          className="hover-zoom"
+                          href={sponsor.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            pointerEvents: sponsor.url ? "inherit" : "none",
+                            position: "relative",
+                          }}
+                        >
+                          <img
+                            src={`${S3_URL}/${sponsor.image_path}`}
+                            alt={sponsor.name}
+                            style={{
+                              maxHeight: sponsor.height
+                                ? sponsor.height
+                                : "80px",
+                              width: "100%",
+                            }}
+                          />
+                        </a>
+                        {isEditor && !isSponsor3Preview && (
+                          <IconButton
+                            component="span"
+                            className="sponsor-edit-btn"
+                            key="sponsor-3-edit"
+                            size="small"
+                            onClick={() => {
+                              editSponsorHandler3(sponsor);
+                            }}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        )}
+                      </Box>
+                    ))}
+                  {!isSponsor3Preview &&
+                    landingSection9Sponsors.map((sponsor) => (
+                      <Box>
+                        <a
+                          className="hover-zoom"
+                          href={sponsor.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            pointerEvents: sponsor.url ? "inherit" : "none",
+                            position: "relative",
+                          }}
+                        >
+                          <img
+                            src={`${S3_URL}/${sponsor.image_path}`}
+                            alt={sponsor.name}
+                            style={{
+                              maxHeight: sponsor.height
+                                ? sponsor.height
+                                : "80px",
+                              width: "100%",
+                              objectFit: "contain",
+                            }}
+                          />
+                        </a>
+                        {isEditor && !isSponsor3Preview && (
+                          <IconButton
+                            component="span"
+                            className="sponsor-edit-btn"
+                            key="sponsor-2-edit"
+                            size="small"
+                            color="primary"
+                            onClick={() => {
+                              editSponsorHandler3(sponsor);
+                            }}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        )}
+                      </Box>
+                    ))}
+                  {isEditor && !isSponsor3Preview && (
+                    <Stack
+                      sx={{
+                        width: "110px",
+                        height: "80px",
+                      }}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <IconButton onClick={addSponsorHandler3}>
                         <AddCircleOutlineIcon color="primary" />
                       </IconButton>
                     </Stack>
@@ -1511,6 +1719,21 @@ const Landing = () => {
               sponsorList={landingSection8Sponsors}
               setIsSponsorPreview={setIsSponsor2Preview}
               setPreviewSponsorList={setPreviewSponsor2List}
+              year={currentYear}
+            />
+          )}
+          {(openSponsorModal3 || isSponsor3Preview) && (
+            <SponsorForm
+              key="sponsor-3"
+              sectionNo="9"
+              open={openSponsorModal3}
+              setOpen={setOpenSponsorModal3}
+              edit={editSponsor3}
+              selectedSponsor={selectedSponsor3}
+              className={isSponsor3Preview ? "hide" : ""}
+              sponsorList={landingSection9Sponsors}
+              setIsSponsorPreview={setIsSponsor3Preview}
+              setPreviewSponsorList={setPreviewSponsor3List}
               year={currentYear}
             />
           )}

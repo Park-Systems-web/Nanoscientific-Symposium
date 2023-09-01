@@ -633,8 +633,11 @@ const commonCtrl = {
       if (
         nation === "china" &&
         id !== "4" &&
+        // sponsor
         id !== "7" &&
         id !== "8" &&
+        id !== "9" &&
+        // sponsor end
         id !== "6"
       ) {
         sql = `
@@ -651,7 +654,7 @@ const commonCtrl = {
       SELECT * FROM landing_section_${id}${
           year && year !== "2022"
             ? ` WHERE year="${year}"`
-            : ` WHERE year IS NULL`
+            : ` WHERE year IS NULL OR year="2022"`
         };
       `;
       const row = await connection.query(sql);
