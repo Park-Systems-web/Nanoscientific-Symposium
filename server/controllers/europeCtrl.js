@@ -71,6 +71,13 @@ const europeCtrl = {
       result,
     });
   },
+  // 체크
+  getIsRegistrationEnded: async (req, res) => {
+    const result = new Date() >= new Date("2023-09-09 00:00:00+2");
+    return res.status(200).json({
+      result,
+    });
+  },
 };
 
 module.exports = europeCtrl;

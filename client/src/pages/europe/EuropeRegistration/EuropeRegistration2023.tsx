@@ -47,6 +47,11 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
   const [isEarlyBird, setIsEarlyBird] = useState<boolean>(false);
   const [isEarlyBirdLoading, setIsEarlyBirdLoading] = useState<boolean>(true);
 
+  const [isRegistrationEnded, setIsRegistrationEnded] =
+    useState<boolean>(false);
+  const [isRegistrationEndedLoading, setIsRegistrationEndedLoading] =
+    useState<boolean>(true);
+
   // stage
   const [stage, setStage] = useState<number>(1);
 
@@ -119,6 +124,18 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
     }
   };
 
+  const getIsRegistrationEnded = async () => {
+    try {
+      const res = await axios.get("/api/page/eu/registration-ended");
+      setIsRegistrationEnded(res.data.result);
+      console.log(res.data.result);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsRegistrationEndedLoading(false);
+    }
+  };
+
   // 랭킹 드롭다운 박스 이벤트 부여
 
   // n = 순위 개수
@@ -188,6 +205,7 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
   };
 
   useEffect(() => {
+    getIsRegistrationEnded();
     getIsEarlyBird();
     setMktoLoading(true);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -295,8 +313,19 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
             />
           </Stack>
         </LandingSection>
-
-        {init && (
+        {init && isRegistrationEnded && (
+          <Typography
+            className="body-fit"
+            fontSize={subHeadingFontSize}
+            fontWeight={600}
+            textAlign="center"
+            mt={5}
+            mb={5}
+          >
+            Registration has been closed.
+          </Typography>
+        )}
+        {init && !isRegistrationEnded && (
           <Stack className="layout body-fit-banner">
             <Box className="text-center" mb={5}>
               <Typography fontSize={headingFontSize} mb={1}>
@@ -448,7 +477,7 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
             </Box>
             <Box mt={1}>
               <Typography fontWeight={700} fontStyle="italic">
-                Registration will close on September 5th 2023.
+                Registration will close on September 9th, 2023.
               </Typography>
             </Box>
           </Stack>

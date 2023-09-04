@@ -90,5 +90,7 @@ router
 
 // 서버시간 통해 얼리버드 체크
 router.route("/early").get(europeCtrl.getIsEarlyBird);
+// 서버시간 통해 등록 종료 시점 체크
+router.route("/registration-ended").get(europeCtrl.getIsRegistrationEnded);
 
 module.exports = router;
