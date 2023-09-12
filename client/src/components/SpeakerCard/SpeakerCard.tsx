@@ -40,12 +40,18 @@ const SpeakerCard = ({
   const langSfx = currentLanguage === "china" ? "" : "_en";
 
   const currentName =
-    pathname === "china" ? speaker[`name${langSfx}`] : speaker.name;
+    pathname === "china"
+      ? speaker[`name${langSfx}`] || speaker.name || speaker.name_en
+      : speaker.name;
   const currentBelong =
-    pathname === "china" ? speaker[`belong${langSfx}`] : speaker.belong;
+    pathname === "china"
+      ? speaker[`belong${langSfx}`] || speaker.belong || speaker.belong_en
+      : speaker.belong;
   const currentDescription =
     pathname === "china"
-      ? speaker[`description${langSfx}`]
+      ? speaker[`description${langSfx}`] ||
+        speaker.description ||
+        speaker.description_en
       : speaker.description;
 
   return (

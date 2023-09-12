@@ -16,6 +16,7 @@ import InnerHTML from "dangerously-set-html-content";
 import LandingSection from "components/Section/LandingSection";
 import { globalData } from "utils/GlobalData";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useAdminStore from "store/AdminStore";
 import { SpeakerDetailContainer } from "./SpeakerDetailStyles";
 
 const SpeakerDetail = () => {
@@ -23,9 +24,17 @@ const SpeakerDetail = () => {
   const pathname = usePageViews();
   const nssType = useNSSType();
   const theme = useTheme();
+  const { currentLanguage } = useAdminStore();
+  const langSfx = currentLanguage === "china" ? "" : "_en";
 
   const [speakerData, setSpeakerData] =
     useState<Speaker.speakerDetailType>(null);
+
+  const [currentName, setCurrentName] = useState<string>(null);
+  const [currentTitle, setCurrentTitle] = useState<string>(null);
+  const [currentBelong, setCurrentBelong] = useState<string>(null);
+  const [currentDescription, setCurrentDescription] = useState<string>(null);
+
   const [speakerLoading, setSpeakerLoading] = useState<boolean>(true);
   const nationData = globalData.get(nssType) as Common.globalDataType;
 
@@ -47,6 +56,39 @@ const SpeakerDetail = () => {
   useEffect(() => {
     getSpeakerDetailById();
   }, []);
+
+  useEffect(() => {
+    if (speakerData) {
+      setCurrentName(
+        pathname === "china"
+          ? speakerData[`name${langSfx}`] ||
+              speakerData.name ||
+              speakerData.name_en
+          : speakerData.name,
+      );
+      setCurrentTitle(
+        pathname === "china"
+          ? speakerData[`title${langSfx}`] ||
+              speakerData.title ||
+              speakerData.title_en
+          : speakerData.title,
+      );
+      setCurrentBelong(
+        pathname === "china"
+          ? speakerData[`belong${langSfx}`] ||
+              speakerData.belong ||
+              speakerData.belong_en
+          : speakerData.belong,
+      );
+      setCurrentDescription(
+        pathname === "china"
+          ? speakerData[`description${langSfx}`] ||
+              speakerData.description ||
+              speakerData.description_en
+          : speakerData.description,
+      );
+    }
+  }, [speakerData]);
 
   return (
     <SpeakerDetailContainer className="body-fit">
@@ -98,12 +140,12 @@ const SpeakerDetail = () => {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {speakerData.name}:{" "}
+                  {currentName}:{" "}
                 </span>
-                <InnerHTML html={speakerData.title} />
+                <InnerHTML html={currentTitle} />
               </Typography>
               <Typography className="editor-content" fontSize={mainFontSize}>
-                <InnerHTML html={speakerData.belong} />
+                <InnerHTML html={currentBelong} />
               </Typography>
             </Stack>
           </Stack>
@@ -113,7 +155,7 @@ const SpeakerDetail = () => {
             lineHeight={1.7}
             color={theme.palette.grey[600]}
           >
-            <InnerHTML html={speakerData.description} />
+            <InnerHTML html={currentDescription} />
           </Typography>
         </Stack>
       )}
