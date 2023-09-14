@@ -44,7 +44,7 @@ declare namespace Speaker {
     status: number;
     keynote?: number;
     has_abstract?: number;
-    // isChanged?: boolean;
+    is_hide?: number;
   }
 
   interface speakerDetailType {

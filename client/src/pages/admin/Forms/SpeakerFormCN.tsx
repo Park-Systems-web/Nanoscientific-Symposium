@@ -54,6 +54,10 @@ const SpeakerFormCN = ({
     edit ? selectedSpeaker.has_abstract === 1 : false,
   );
 
+  const [isHideCheck, setIsHideCheck] = useState<boolean>(
+    edit ? selectedSpeaker.is_hide === 1 : false,
+  );
+
   const name = useInput(edit ? selectedSpeaker.name : "");
   const name_en = useInput(edit ? selectedSpeaker.name_en : "");
   const belong = useInput(edit ? selectedSpeaker.belong : "");
@@ -115,6 +119,7 @@ const SpeakerFormCN = ({
         abstractDesc: escapeQuotes(abstractDesc),
         abstractDesc_en: escapeQuotes(abstractDescEN),
         hasAbstract: hasAbstractCheck,
+        is_hide: isHideCheck,
         year: currentYear,
       });
     } else {
@@ -134,6 +139,7 @@ const SpeakerFormCN = ({
         abstractDesc: escapeQuotes(abstractDesc),
         abstractDesc_en: escapeQuotes(abstractDescEN),
         hasAbstract: hasAbstractCheck,
+        is_hide: isHideCheck,
         year: currentYear,
       });
     }
@@ -265,6 +271,15 @@ const SpeakerFormCN = ({
             />
           }
           label="Show Speakers Abstract"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isHideCheck}
+              onClick={() => setIsHideCheck(!isHideCheck)}
+            />
+          }
+          label="Hide Speaker?"
         />
       </Stack>
       {/* abstract form */}

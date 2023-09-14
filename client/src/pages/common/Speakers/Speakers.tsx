@@ -62,9 +62,13 @@ const Speakers = () => {
             spacing={{ xs: 4, md: 7 }}
             columns={{ xs: 1, sm: 8, md: 16 }}
           >
-            {speakersState.map((speaker) => (
-              <SpeakerCard key={speaker.id} speaker={speaker} />
-            ))}
+            {speakersState.map((speaker) => {
+              return (
+                !speaker.is_hide && (
+                  <SpeakerCard key={speaker.id} speaker={speaker} />
+                )
+              );
+            })}
           </Grid>
         )}
       </Box>

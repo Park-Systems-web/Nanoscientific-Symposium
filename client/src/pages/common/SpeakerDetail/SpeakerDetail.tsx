@@ -17,6 +17,7 @@ import LandingSection from "components/Section/LandingSection";
 import { globalData } from "utils/GlobalData";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useAdminStore from "store/AdminStore";
+import useCurrentYear from "hooks/useCurrentYear";
 import { SpeakerDetailContainer } from "./SpeakerDetailStyles";
 
 const SpeakerDetail = () => {
@@ -24,6 +25,7 @@ const SpeakerDetail = () => {
   const pathname = usePageViews();
   const nssType = useNSSType();
   const theme = useTheme();
+  const currentYear = useCurrentYear();
   const { currentLanguage } = useAdminStore();
   const langSfx = currentLanguage === "china" ? "" : "_en";
 
@@ -101,7 +103,7 @@ const SpeakerDetail = () => {
             alignItems="center"
             sx={{ mb: 2 }}
           >
-            <Link to={`/${pathname}/speakers`} className="p0">
+            <Link to={`/${pathname}/${currentYear}/speakers`} className="p0">
               <ArrowBackIcon className="btn-alpha" />
             </Link>
           </Stack>

@@ -13,6 +13,7 @@ import Link from "components/Link/LinkWithSearch";
 import usePageViews from "hooks/usePageViews";
 import InnerHTML from "dangerously-set-html-content";
 import useAdminStore from "store/AdminStore";
+import useCurrentYear from "hooks/useCurrentYear";
 
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
@@ -36,6 +37,7 @@ const SpeakerCard = ({
 }: SpeakerCardProps) => {
   const theme = useTheme();
   const pathname = usePageViews();
+  const currentYear = useCurrentYear();
   const { currentLanguage } = useAdminStore();
   const langSfx = currentLanguage === "china" ? "" : "_en";
 
@@ -61,12 +63,13 @@ const SpeakerCard = ({
       sx={{
         cursor: `${isAdmin ? "pointer" : "auto"}`,
         width: { laptop: "33.3%", mobile: "100%" },
+        opacity: `${isAdmin && speaker.is_hide ? "0.5" : "1"}`,
       }}
-      className={`${isAdmin ? "hover-zoom" : ""}`}
+      className={`${isAdmin ? "hover-zoom " : ""}`}
       onClick={onClick}
     >
       <Link
-        to={`/${pathname}/speakers/${speaker.id}`}
+        to={`/${pathname}/${currentYear}/speakers/${speaker.id}`}
         style={{
           padding: 0,
           pointerEvents:

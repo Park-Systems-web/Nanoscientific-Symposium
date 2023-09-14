@@ -486,6 +486,7 @@ const adminCtrl = {
       abstractDesc,
       abstractDesc_en,
       hasAbstract,
+      is_hide,
       year,
     } = req.body;
 
@@ -507,7 +508,8 @@ const adminCtrl = {
           description,
           description_en,
           has_abstract,
-          year
+      is_hide,
+      year
         )
         VALUES(
           '${name}',
@@ -520,6 +522,7 @@ const adminCtrl = {
           '${description}',
           '${description_en}',
            ${hasAbstract},
+           ${is_hide},
            ${year && year !== "2022" ? `'${year}'` : null}
         )`;
       } else
@@ -581,6 +584,7 @@ const adminCtrl = {
       abstractDesc,
       abstractDesc_en,
       hasAbstract,
+      is_hide,
       year,
     } = req.body;
 
@@ -598,6 +602,7 @@ const adminCtrl = {
       description='${description}', 
       description_en='${description_en}', 
       has_abstract=${hasAbstract},
+      is_hide=${is_hide},
       year=${year && year !== "2022" ? `'${year}'` : null}
       WHERE id=${id}
       `;
@@ -609,6 +614,7 @@ const adminCtrl = {
       keynote=${keynote},
       description='${description}', 
       has_abstract=${hasAbstract},
+      is_hide=${is_hide},
       year=${year && year !== "2022" ? `'${year}'` : null}
       WHERE id=${id}
       `;
