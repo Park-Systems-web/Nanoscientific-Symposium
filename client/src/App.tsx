@@ -36,6 +36,7 @@ import ChinaRoutes from "Routes/ChinaRoutes";
 import CommonRoutes from "Routes/CommonRoutes";
 import useAdminStore from "store/AdminStore";
 import useCurrentURL from "hooks/useCurrentURL";
+import CommonChinaRoutes from "Routes/CommonChinaRoutes";
 import AdminRoutes from "./Routes/AdminRoutes";
 import { useAuthState, useAuthDispatch } from "./context/AuthContext";
 import { useThemeState, useThemeDispatch } from "./context/ThemeContext";
@@ -532,9 +533,13 @@ const App = () => {
         )}
         <Routes>
           {/* common */}
-          {CommonRoutes.map((route) => {
-            return routeLoopHelper(route);
-          })}
+          {currentURL !== "china"
+            ? CommonRoutes.map((route) => {
+                return routeLoopHelper(route);
+              })
+            : CommonChinaRoutes.map((route) => {
+                return routeLoopHelper(route);
+              })}
           {/* admin */}
           {AdminRoutes.map((route) => {
             return routeLoopHelper(route, true);

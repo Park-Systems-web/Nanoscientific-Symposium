@@ -51,6 +51,8 @@ import Landing6Form from "pages/admin/Forms/Landing6Form";
 import { escapeQuotes } from "utils/String";
 import useNSSType from "hooks/useNSSType";
 import LandingBannerForm from "pages/admin/Forms/LandingBannerForm";
+import useCurrentURL from "hooks/useCurrentURL";
+import { useNavigate as useNavigateWithSearch } from "hooks/useNavigateWithSearch";
 import { SpeakersContainer } from "../Speakers/SpeakersStyles";
 import { LandingContainer } from "./LandingStyles";
 
@@ -67,6 +69,7 @@ interface LandingSectionProps extends React.ComponentPropsWithRef<"div"> {
 
 const Landing = () => {
   const currentYear = useCurrentYear();
+  const currentURL = useCurrentURL();
   // const { currentYear } = props;
 
   const pathname = usePageViews();
@@ -77,7 +80,6 @@ const Landing = () => {
   const isEditor = editorRole.includes(authState.role);
   const isAdmin = adminRole.includes(authState.role);
   const { currentLanguage } = useAdminStore();
-
   const landingRefList = [
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
@@ -96,6 +98,7 @@ const Landing = () => {
   // E: landing banner 관련
 
   const navigate = useNavigate();
+  const navigateWithSearch = useNavigateWithSearch();
 
   const [originalLandingList, setOriginalLandingList] = useState<
     Landing.landingType[]
@@ -653,6 +656,9 @@ const Landing = () => {
   };
 
   useEffect(() => {
+    if (currentURL === "china" && !location.pathname.includes("china")) {
+      navigateWithSearch("/china");
+    }
     getLandingBanner();
     getLandingList();
     getKeynoteList();
