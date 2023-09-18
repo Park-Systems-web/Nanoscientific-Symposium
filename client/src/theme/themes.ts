@@ -164,7 +164,7 @@ export const enTheme = (isDark: boolean) => {
   return createTheme({
     typography: {
       allVariants: {
-        fontFamily: `'Noto Sans SC', sans-serif`,
+        fontFamily: `"Microsoft JhengHei", sans-serif`,
         // fontFamily: `"Open Sans", sans-serif`,
       },
     },

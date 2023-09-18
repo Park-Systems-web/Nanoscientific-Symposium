@@ -9,10 +9,10 @@ import useCurrentURL from "./useCurrentURL";
 const useNationRoutes = (): any[] => {
   const currentURL = useCurrentURL();
 
-  if(currentURL === "china") {
+  if (currentURL === "china") {
     return [ChinaRoutes];
   }
-  return [AsiaRoutes,KoreaRoutes,UsRoutes,EuropeRoutes,JapanRoutes]
-  };
-  
-  export default useNationRoutes;
+  return [AsiaRoutes, KoreaRoutes, UsRoutes, EuropeRoutes, JapanRoutes];
+};
+
+export default useNationRoutes;

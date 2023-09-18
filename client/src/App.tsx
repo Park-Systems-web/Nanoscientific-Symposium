@@ -44,7 +44,6 @@ import { useUnreadListDispatch } from "./context/UnreadAnnouncementList";
 import { useAlarmDispatch } from "./context/NavBarMarkContext";
 import Loading from "./components/Loading/Loading";
 import { AppContainer } from "./AppStyles";
-import "./css/font.css";
 
 interface routeType {
   path: string;
@@ -427,14 +426,16 @@ const App = () => {
   useEffect(() => {
     setCurrentMenu(window.location.pathname);
     // ga
-    const { title } = window.document;
-    const { href } = window.location;
-    const path = window.location.pathname;
-    window.gtag("config", gaID, {
-      page_title: title,
-      page_location: href,
-      page_path: path,
-    });
+    if (currentNation !== "china") {
+      const { title } = window.document;
+      const { href } = window.location;
+      const path = window.location.pathname;
+      window.gtag("config", gaID, {
+        page_title: title,
+        page_location: href,
+        page_path: path,
+      });
+    }
   }, [menuList, window.location.href]);
 
   // doc title 변경

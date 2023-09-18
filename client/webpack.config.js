@@ -149,7 +149,10 @@ module.exports = (env, argv) => {
     plugins: [
       // 기본 html 위치 설정.
       new HtmlWebpackPlugin({
-        template: "./public/index.html",
+        template:
+          env.port === "8080"
+            ? "./public/index.html"
+            : "./public/index-cn.html",
         filename: "index.html",
       }),
       // Typescript(타입스크립트)의 컴파일 속도 향상을 위한 플러그인을 설정

@@ -63,70 +63,79 @@ const Registration = ({ formNo }: RegistrationProps) => {
     });
 
   useEffect(() => {
-    // validation & 중복체크
-    const handleChange = async (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      if (
-        target.value.indexOf("@") === -1 ||
-        target.value.lastIndexOf(".") <= target.value.indexOf("@")
-      ) {
-        setEmailValid(0);
-      } else {
-        try {
-          setEmailValidLoading(true);
-          const res = await axios.post("/api/users/checkemail", {
-            email: target.value,
-            nation,
-            year: currentYear,
-          });
-          setEmailValid(!res.data.result ? 1 : 0);
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setEmailValidLoading(false);
+    if (nation === "china") {
+      window.open("https://www.koushare.com/lives/room/758343");
+      window.history.back();
+    } else {
+      // validation & 중복체크
+      const handleChange = async (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        if (
+          target.value.indexOf("@") === -1 ||
+          target.value.lastIndexOf(".") <= target.value.indexOf("@")
+        ) {
+          setEmailValid(0);
+        } else {
+          try {
+            setEmailValidLoading(true);
+            const res = await axios.post("/api/users/checkemail", {
+              email: target.value,
+              nation,
+              year: currentYear,
+            });
+            setEmailValid(!res.data.result ? 1 : 0);
+          } catch (err) {
+            console.log(err);
+          } finally {
+            setEmailValidLoading(false);
+          }
         }
-      }
-    };
-    // const script = document.createElement("script");
-    // document.body.appendChild(script);
-    setMktoLoading(true);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.MktoForms2.loadForm(
-      "//pages.parksystems.com",
-      "988-FTP-549",
-      formNo,
-      (form: any) => {
-        document.querySelector(".mktoButton[type='submit']")?.remove();
+      };
+      // const script = document.createElement("script");
+      // document.body.appendChild(script);
+      setMktoLoading(true);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      window.MktoForms2.loadForm(
+        "//pages.parksystems.com",
+        "988-FTP-549",
+        formNo,
+        (form: any) => {
+          document.querySelector(".mktoButton[type='submit']")?.remove();
 
-        setMktoLoading(false);
+          setMktoLoading(false);
 
-        // validation 끼워넣기
-        const validationDiv = document.createElement("div");
-        validationDiv.className = "validation-msg";
+          // validation 끼워넣기
+          const validationDiv = document.createElement("div");
+          validationDiv.className = "validation-msg";
 
-        // 체크박스 layout 변경
-        const check1 = document.querySelector("#LblpsmktOptin")?.parentElement;
-        const check2 = document.querySelector("#LblpsOptin")?.parentElement;
+          // 체크박스 layout 변경
+          const check1 =
+            document.querySelector("#LblpsmktOptin")?.parentElement;
+          const check2 = document.querySelector("#LblpsOptin")?.parentElement;
 
-        // check1?.classList.add("flex-reverse");
-        // check2?.classList.add("flex-reverse");
+          // check1?.classList.add("flex-reverse");
+          // check2?.classList.add("flex-reverse");
 
-        document
-          .querySelector("#LblEmail")
-          ?.parentElement?.appendChild(validationDiv);
+          document
+            .querySelector("#LblEmail")
+            ?.parentElement?.appendChild(validationDiv);
+          document
+            .querySelector("input#Email")
+            ?.removeEventListener("change", handleChange);
+          document
+            .querySelector("input#Email")
+            ?.addEventListener("change", handleChange);
+        },
+      );
+      return () => {
         document
           .querySelector("input#Email")
           ?.removeEventListener("change", handleChange);
-        document
-          .querySelector("input#Email")
-          ?.addEventListener("change", handleChange);
-      },
-    );
+      };
+    }
     return () => {
-      document
-        .querySelector("input#Email")
-        ?.removeEventListener("change", handleChange);
+      //
     };
   }, []);
 

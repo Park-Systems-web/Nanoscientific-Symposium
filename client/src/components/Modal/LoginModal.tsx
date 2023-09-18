@@ -271,11 +271,12 @@ const LoginModal = ({
         );
         setSuccess(true);
         setPasswordInputModalOpen(false);
-
-        await axios.post(`/api/zoom/webinar/registrant/fetch`, {
-          email,
-          nation: currentNation,
-        });
+        if (currentNation !== "china") {
+          await axios.post(`/api/zoom/webinar/registrant/fetch`, {
+            email,
+            nation: currentNation,
+          });
+        }
       } else {
         setPasswordNotMatchAlert(true);
       }
