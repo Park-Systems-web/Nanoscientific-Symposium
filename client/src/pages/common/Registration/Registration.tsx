@@ -26,6 +26,8 @@ interface RegistrationProps {
 
 type TFN = 1 | 0 | -1;
 
+const ChinaRegistrationLink = "https://www.koushare.com/lives/room/313638";
+
 const Registration = ({ formNo }: RegistrationProps) => {
   const [mktoLoading, setMktoLoading] = useState<boolean>(false);
   const [submitBlock, setSubmitBlock] = useState<boolean>(false);
@@ -64,7 +66,7 @@ const Registration = ({ formNo }: RegistrationProps) => {
 
   useEffect(() => {
     if (nation === "china") {
-      window.open("https://www.koushare.com/lives/room/758343");
+      window.open(ChinaRegistrationLink);
       window.history.back();
     } else {
       // validation & 중복체크
