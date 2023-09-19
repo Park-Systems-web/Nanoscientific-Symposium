@@ -570,12 +570,12 @@ const Landing = () => {
     setIsSponsor2Preview(false);
     setOpenSponsorModal2(true);
   };
-  // landing 9 handler
+  // landing9 handler
   const applyLanding9Title = async () => {
     if (confirm("Are you sure?")) {
       const result = await axios.post(`/api/page/common/landing/title/9`, {
         nation: pathname,
-        title: escapeQuotes(landing8Title),
+        title: escapeQuotes(landing9Title),
         language: pathname === "china" ? currentLanguage : undefined,
         year: currentYear,
       });
