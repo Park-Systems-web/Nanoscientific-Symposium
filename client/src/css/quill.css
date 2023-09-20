@@ -307,7 +307,7 @@ li.ql-indent-9.ql-direction-rtl.ql-align-right {
   padding-right: 28.5em;
 }
 .ql-video {
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 .ql-video.ql-align-center {
