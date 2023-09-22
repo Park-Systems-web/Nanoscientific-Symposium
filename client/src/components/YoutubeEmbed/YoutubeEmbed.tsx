@@ -23,7 +23,7 @@ const YoutubeEmbed = ({
 
   if (embedId) {
     resultSrc = `https://www.youtube.com/embed/${embedId}${
-      noAutoplay ? "" : "?autoplay=1&mute=1&playsinline=1"
+      noAutoplay ? "?playsinline=1" : "?autoplay=1&mute=1&playsinline=1"
     }`;
   } else if (url) {
     if (url.indexOf("embed") !== -1 || url.indexOf("bilibili") !== -1) {
@@ -31,7 +31,7 @@ const YoutubeEmbed = ({
     } else if (url.indexOf("watch") !== -1) {
       const calculatedEmbedId = url.split("v=")[1].split("&")[0];
       resultSrc = `https://www.youtube.com/embed/${calculatedEmbedId}${
-        noAutoplay ? "" : "?autoplay=1&mute=1&playsinline=1"
+        noAutoplay ? "?playsinline=1" : "?autoplay=1&mute=1&playsinline=1"
       }`;
     }
   }
