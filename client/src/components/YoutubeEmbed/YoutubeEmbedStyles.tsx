@@ -16,7 +16,7 @@ export const YoutubeEmbedContainer = styled.div`
     position: absolute;
   }
 
-  @media (max-width: 900px) {
+  @media screen and (max-width: 900px) {
     .video-responsive iframe {
       height: 80%;
       width: 80%;

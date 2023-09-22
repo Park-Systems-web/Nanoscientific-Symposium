@@ -1,24 +1,38 @@
 /* eslint-disable react/require-default-props */
 import React from "react";
+import { YoutubeEmbedContainer } from "./YoutubeEmbedStyles";
 
 interface YoutubeEmbedProps {
   embedId?: string;
   url?: string;
   width?: string;
   height?: string;
+  rounded?: boolean;
+  noAutoplay?: boolean;
 }
 
-const YoutubeEmbed = ({ embedId, url, width, height }: YoutubeEmbedProps) => {
+const YoutubeEmbed = ({
+  embedId,
+  url,
+  width,
+  height,
+  rounded,
+  noAutoplay,
+}: YoutubeEmbedProps) => {
   let resultSrc = "";
 
   if (embedId) {
-    resultSrc = `https://www.youtube.com/embed/${embedId}?autoplay=1&mute=1&playsinline=1`;
+    resultSrc = `https://www.youtube.com/embed/${embedId}${
+      noAutoplay ? "" : "?autoplay=1&mute=1&playsinline=1"
+    }`;
   } else if (url) {
     if (url.indexOf("embed") !== -1 || url.indexOf("bilibili") !== -1) {
       resultSrc = url;
     } else if (url.indexOf("watch") !== -1) {
       const calculatedEmbedId = url.split("v=")[1].split("&")[0];
-      resultSrc = `https://www.youtube.com/embed/${calculatedEmbedId}?autoplay=1&mute=1&playsinline=1`;
+      resultSrc = `https://www.youtube.com/embed/${calculatedEmbedId}${
+        noAutoplay ? "" : "?autoplay=1&mute=1&playsinline=1"
+      }`;
     }
   }
 
@@ -39,7 +53,7 @@ const YoutubeEmbed = ({ embedId, url, width, height }: YoutubeEmbedProps) => {
         allow=" accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embedded youtube"
-        style={{ maxWidth: "100vw" }}
+        style={{ maxWidth: "100vw", borderRadius: rounded ? "15px" : "0" }}
       />
     </div>
   );

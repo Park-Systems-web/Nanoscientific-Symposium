@@ -385,6 +385,26 @@ export const globalData = new Map<string, Common.globalDataType>([
         <a href="/kr/2023/register-info" class="link-default" target="_blank" >등록 안내 바로가기</a><br /><br />
         문의처: <a class="link-default" href="mailto:raina@parksystems.com">raina@parksystems.com</a><br />
         `,
+
+      // Event 종료 후 데이터
+      isEventEnded: true,
+      postEventGalleryTitle: "현장 스케치",
+      postEventGalleryImageList: [
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_01.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_02.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_03.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_04.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_05.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_06.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_07.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_08.jpg`,
+        `${S3_URL}/upload/kr/landing/NSSK_Higlight_09.jpg`,
+      ],
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "2023 NSS Korea 현장 돌아보기",
+      postEventHighlightDesc:
+        "2023년 나노사이언티픽 심포지엄 코리아는 국내 저명한 연사들의 초청발표와 원자현미경 장비 체험을 통해 SPM 커뮤니티의 저변을 확대하였습니다. 하이라이트 영상을 통해 생생한 이벤트 현장을 경험해보세요.",
+      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=mZ3U5gum1_c",
     },
   ],
   [

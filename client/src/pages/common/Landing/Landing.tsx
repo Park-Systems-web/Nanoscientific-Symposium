@@ -53,6 +53,8 @@ import useNSSType from "hooks/useNSSType";
 import LandingBannerForm from "pages/admin/Forms/LandingBannerForm";
 import useCurrentURL from "hooks/useCurrentURL";
 import { useNavigate as useNavigateWithSearch } from "hooks/useNavigateWithSearch";
+import LandingGallery from "components/LandingGallery/LandingGallery";
+import useWindowSize from "hooks/useWindowSize";
 import { SpeakersContainer } from "../Speakers/SpeakersStyles";
 import { LandingContainer } from "./LandingStyles";
 
@@ -70,6 +72,7 @@ interface LandingSectionProps extends React.ComponentPropsWithRef<"div"> {
 const Landing = () => {
   const currentYear = useCurrentYear();
   const currentURL = useCurrentURL();
+  const isMobile = useWindowSize().width < 1200;
   // const { currentYear } = props;
 
   const pathname = usePageViews();
@@ -91,7 +94,16 @@ const Landing = () => {
     useRef<HTMLDivElement>(null),
   ];
 
-  const { registration } = globalData.get(nssType) as Common.globalDataType;
+  const {
+    registration,
+    isEventEnded,
+    postEventGalleryTitle,
+    postEventGalleryImageList,
+    postEventHighlightSubtitle,
+    postEventHighlightTitle,
+    postEventHighlightDesc,
+    postEventHighlightVideoURL,
+  } = globalData.get(nssType) as Common.globalDataType;
 
   // S: landing banner 관련
 
@@ -570,12 +582,12 @@ const Landing = () => {
     setIsSponsor2Preview(false);
     setOpenSponsorModal2(true);
   };
-  // landing 9 handler
+  // landing9 handler
   const applyLanding9Title = async () => {
     if (confirm("Are you sure?")) {
       const result = await axios.post(`/api/page/common/landing/title/9`, {
         nation: pathname,
-        title: escapeQuotes(landing8Title),
+        title: escapeQuotes(landing9Title),
         language: pathname === "china" ? currentLanguage : undefined,
         year: currentYear,
       });
@@ -824,7 +836,67 @@ const Landing = () => {
           selected={landingBannerContent}
         />
       )}
+      {/* post-event section1: highlight review */}
+      {isEventEnded && (
+        <Box
+          display="flex"
+          className="section layout post-event-section-1"
+          flexDirection={isMobile ? "column" : "row"}
+          justifyContent="space-between"
+        >
+          <Stack className="desc-wrap" justifyContent="center" width="50%">
+            <Typography
+              fontSize={smallFontSize}
+              color={theme.palette.primary.main}
+              fontWeight={theme.typography.fontWeightBold}
+              mb={1}
+            >
+              {postEventHighlightSubtitle}
+            </Typography>
+            <Typography
+              mb={2}
+              fontSize={headingFontSize}
+              fontWeight={theme.typography.fontWeightBold}
+            >
+              {postEventHighlightTitle}
+            </Typography>
+            <Typography fontSize={mainFontSize}>
+              <InnerHTML html={postEventHighlightDesc} />
+            </Typography>
+          </Stack>
+          <YoutubeEmbed
+            url={postEventHighlightVideoURL}
+            width="580"
+            height="360"
+            rounded
+            noAutoplay
+          />
+        </Box>
+      )}
+      {/* post-event section2: Gallery */}
+      {isEventEnded && (
+        <LandingSection
+          className="post-event-section-2"
+          fullWidth
+          maxWidth="1920px"
+        >
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            className="layout"
+            sx={{
+              mb: 3,
+              fontSize: headingFontSize,
+              fontWeight: theme.typography.fontWeightBold,
+            }}
+          >
+            {postEventGalleryTitle}
+          </Stack>
 
+          <LandingGallery imageList={postEventGalleryImageList} />
+        </LandingSection>
+      )}
       {/* section2 */}
       {!landingListLoading && landingList.length !== 0 && (
         <BackgroundVectorColored maxWidth="1920px">
@@ -1625,6 +1697,7 @@ const Landing = () => {
               </Stack>
             </LandingSection>
           )}
+
           {/* sticky menu */}
           {isEditor && (
             <Stack className="sticky-menu">

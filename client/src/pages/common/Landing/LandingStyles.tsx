@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const LandingContainer = styled.div`
   .sticky-menu {
     position: fixed;
+    z-index: 1;
     top: 15%;
     left: 85%;
     width: 200px;
@@ -57,10 +58,39 @@ export const LandingContainer = styled.div`
     margin: 0;
   }
 
+  .post-event-section-1 {
+    .desc-wrap {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .post-event-section-1 {
+      flex-direction: column;
+      .desc-wrap {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+    .post-event-section-2 {
+      .layout {
+        padding: 20px 0;
+      }
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .banner-logo {
       height: auto;
       width: 100%;
+    }
+
+    .video-responsive {
+      iframe {
+        width: 100%;
+        height: 56vw;
+        min-height: 230px;
+      }
     }
   }
 `;
