@@ -228,9 +228,9 @@ export const NavBarContainer = styled.div`
           box-shadow: 0px 2px 2px #0000002b;
           padding: 0 20px;
           box-sizing: border-box;
-          div {
-            transform: scale(1.1) translateY(-15px);
-            transition: transform 0.8s ease-in-out;
+          & > div {
+            transform: scale(1.05) translateY(-10px);
+            transition: transform 0.5s ease-in-out;
           }
         }
       }

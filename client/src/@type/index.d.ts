@@ -318,6 +318,15 @@ declare namespace Common {
     // registration page
     registrationTitle?: string;
     registrationDesc?: string;
+
+    // Event 종료 후 데이터
+    isEventEnded?: boolean;
+    postEventGalleryTitle?: string;
+    postEventGalleryImageList?: string[];
+    postEventHighlightSubtitle?: string;
+    postEventHighlightTitle?: string;
+    postEventHighlightDesc?: string;
+    postEventHighlightVideoURL?: string;
   }
 
   interface MetaTagType {
