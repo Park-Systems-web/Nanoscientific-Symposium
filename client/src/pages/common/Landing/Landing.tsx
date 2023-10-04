@@ -667,10 +667,24 @@ const Landing = () => {
     }
   };
 
+  const [registrationLink, setRegistrationLink] = useState<string>("");
+
   useEffect(() => {
     if (currentURL === "china" && !location.pathname.includes("china")) {
       navigateWithSearch("/china");
     }
+    // set registration link
+    switch (pathname) {
+      case "kr":
+        setRegistrationLink(`/${pathname}/${currentYear}/register-info`);
+        break;
+      case "china":
+        setRegistrationLink("https://www.koushare.com/lives/room/313638");
+        break;
+      default:
+        setRegistrationLink(`/${pathname}/${currentYear}/registration`);
+    }
+
     getLandingBanner();
     getLandingList();
     getKeynoteList();
@@ -783,16 +797,14 @@ const Landing = () => {
                     fontWeight={theme.typography.fontWeightBold}
                     letterSpacing="1.2px"
                   >
-                    <Link
+                    <a
                       style={{ padding: 0, color: "white" }}
-                      to={
-                        pathname === "kr"
-                          ? `/${pathname}/${currentYear}/register-info`
-                          : `/${pathname}/${currentYear}/registration`
-                      }
+                      href={registrationLink}
+                      target={pathname === "china" ? "_blank" : "_self"}
+                      rel="noreferrer"
                     >
                       {registration || ""}
-                    </Link>
+                    </a>
                   </NSSButton>
                 )}
                 {/* {pathname === "jp" && (
