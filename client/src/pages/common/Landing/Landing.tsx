@@ -800,7 +800,6 @@ const Landing = () => {
                     <a
                       style={{ padding: 0, color: "white" }}
                       href={registrationLink}
-                      target={pathname === "china" ? "_blank" : "_self"}
                       rel="noreferrer"
                     >
                       {registration || ""}
