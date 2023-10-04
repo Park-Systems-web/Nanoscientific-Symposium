@@ -122,7 +122,7 @@ const AbstractSubmission = ({ formNo }: abstractProps) => {
 
         // 메일 전송
         const res2 = await axios.post("/api/mail/abstract", {
-          email: configState.alert_receive_email,
+          email: configState.alert_receive_email || "eric.kim@parksystems.com",
           nation: pathname,
           formData,
           year: currentYear,
