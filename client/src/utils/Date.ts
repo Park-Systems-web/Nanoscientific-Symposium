@@ -119,7 +119,7 @@ export const calTimezoneDate = (
   isMinus?: boolean,
 ) => {
   let offset = 0;
-  const splitted = timeZoneOffset.split(":");
+  const splitted = timeZoneOffset.replace(/−/g, "-").split(":");
   offset = (isMinus ? -1 * Number(splitted[0]) : Number(splitted[0])) * 60;
   if (splitted.length === 2) {
     offset += offset > 0 ? Number(splitted[1]) : Number(splitted[1]) * -1;
