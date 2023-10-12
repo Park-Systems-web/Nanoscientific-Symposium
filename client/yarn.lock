@@ -8938,7 +8938,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react-select@^5.7.0":
+"react-select@^5.7.0", "react-select@^5.7.7":
   "integrity" "sha512-HhashZZJDRlfF/AKj0a0Lnfs3sRdw/46VJIRd8IbB9/Ovr74+ZIwkAdSBjSPXsFMG+u72c5xShqwLSKIJllzqw=="
   "resolved" "https://registry.npmjs.org/react-select/-/react-select-5.7.7.tgz"
   "version" "5.7.7"
