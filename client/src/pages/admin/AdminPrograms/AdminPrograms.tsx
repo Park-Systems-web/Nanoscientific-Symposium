@@ -246,7 +246,15 @@ const AdminPrograms = ({ concurrent }: ProgramListProps) => {
                   title={session.session_title}
                   timezone={selectedTimezone}
                   selectedTimeZoneOffset={selectedTimeZoneOffset}
-                  date={session.date}
+                  date={
+                    programs.filter((program) => {
+                      return program.session === session.id;
+                    }).length !== 0
+                      ? programs.filter((program) => {
+                          return program.session === session.id;
+                        })[0].start_time
+                      : session.date
+                  }
                   isAdmin
                   onClick={() => {
                     setSelectedSession(session);
