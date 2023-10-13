@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const LandingGalleryContainer = styled.div`
   margin-bottom: 50px;
   .swiper {
-    &:before {
+    &::before {
       content: "";
       width: 140px;
       height: 100%;
@@ -12,7 +12,7 @@ export const LandingGalleryContainer = styled.div`
       position: absolute;
       z-index: 2;
     }
-    &:after {
+    &::after {
       content: "";
       width: 140px;
       height: 100%;
@@ -53,9 +53,9 @@ export const LandingGalleryContainer = styled.div`
   }
   @media screen and (max-width: 768px) {
     .swiper {
-      &:before,
-      &after {
-        width: 50px;
+      &::before,
+      &::after {
+        width: 30px;
       }
       .prev-button,
       .next-button {
