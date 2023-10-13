@@ -849,7 +849,7 @@ const Landing = () => {
         />
       )}
       {/* post-event section1: highlight review */}
-      {isEventEnded && (
+      {isEventEnded && postEventHighlightTitle && (
         <Box
           display="flex"
           className="section layout post-event-section-1"
@@ -886,7 +886,7 @@ const Landing = () => {
         </Box>
       )}
       {/* post-event section2: Gallery */}
-      {isEventEnded && (
+      {isEventEnded && postEventGalleryTitle && (
         <LandingSection
           className="post-event-section-2"
           fullWidth

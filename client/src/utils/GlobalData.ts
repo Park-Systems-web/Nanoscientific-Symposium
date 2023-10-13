@@ -388,6 +388,11 @@ export const globalData = new Map<string, Common.globalDataType>([
 
       // Event 종료 후 데이터
       isEventEnded: true,
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "2023 NSS Korea 현장 돌아보기",
+      postEventHighlightDesc:
+        "2023년 나노사이언티픽 심포지엄 코리아는 국내 저명한 연사들의 초청발표와 원자현미경 장비 체험을 통해 SPM 커뮤니티의 저변을 확대하였습니다. 하이라이트 영상을 통해 생생한 이벤트 현장을 경험해보세요.",
+      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=mZ3U5gum1_c",
       postEventGalleryTitle: "현장 스케치",
       postEventGalleryImageList: [
         `${S3_URL}/upload/kr/landing/NSSK_Higlight_01.jpg`,
@@ -400,11 +405,6 @@ export const globalData = new Map<string, Common.globalDataType>([
         `${S3_URL}/upload/kr/landing/NSSK_Higlight_08.jpg`,
         `${S3_URL}/upload/kr/landing/NSSK_Higlight_09.jpg`,
       ],
-      postEventHighlightSubtitle: "Highlight Video",
-      postEventHighlightTitle: "2023 NSS Korea 현장 돌아보기",
-      postEventHighlightDesc:
-        "2023년 나노사이언티픽 심포지엄 코리아는 국내 저명한 연사들의 초청발표와 원자현미경 장비 체험을 통해 SPM 커뮤니티의 저변을 확대하였습니다. 하이라이트 영상을 통해 생생한 이벤트 현장을 경험해보세요.",
-      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=mZ3U5gum1_c",
     },
   ],
   [
@@ -720,6 +720,42 @@ export const globalData = new Map<string, Common.globalDataType>([
       registrationStep1Label: "Your Information",
       registrationStep2Label: "Checkout",
       registrationStep3Label: "Complete",
+
+      // Event 종료 후 데이터
+      isEventEnded: true,
+      // postEventHighlightSubtitle: "Highlight Video",
+      // postEventHighlightTitle: "A look back at the NSFE 2023",
+      // postEventHighlightDesc:
+      //   "Once more the NANOscientific Forum Europe brought together members of the SPM community from all over Europe. This year’s host location, the ICFO in beautiful Barcelona, provided the perfect backdrop for 2.5 days of high-quality scientific presentations, insightful hands-on sessions on Park Systems AFMs, and social networking. Watch the video the experience some of the highlights.",
+      // postEventHighlightVideoURL: "https://www.youtube.com/watch?v=mZ3U5gum1_c",
+      postEventGalleryTitle: "On-site impressions",
+      postEventGalleryImageList: [
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_01.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_02.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_03.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_04.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_05.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_06.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_07.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_08.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_09.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_10.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_11.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_12.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_13.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_14.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_15.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_16.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_17.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_18.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_19.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_20.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_21.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_22.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_23.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_24.jpg`,
+        `${S3_URL}/upload/eu/landing/2023NSFE_gallery_25.jpg`,
+      ],
     },
   ],
   [
