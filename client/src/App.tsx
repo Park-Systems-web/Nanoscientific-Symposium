@@ -163,7 +163,11 @@ const App = () => {
           } else if (!res.data.result) {
             // console.log(res.data.result, res.data.unread);
             // 모두 읽지 않음
-            alarmDispatch({ type: "ON" });
+            if (res.data.unread.length !== 0) {
+              alarmDispatch({ type: "ON" });
+            } else {
+              alarmDispatch({ type: "OFF" });
+            }
           }
         } else {
           console.log(res.data.msg);
