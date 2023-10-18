@@ -3,6 +3,7 @@ import Loading from "components/Loading/Loading";
 import usePageViews from "hooks/usePageViews";
 import React, { useEffect, useState } from "react";
 import useMenuStore from "store/MenuStore";
+import useCurrentYear from "hooks/useCurrentYear";
 import PosterSwiper from "./PosterSwiper";
 
 const PosterHall = () => {
@@ -10,11 +11,13 @@ const PosterHall = () => {
   const [posterState, setPosterState] = useState<Poster.posterType[]>([]);
   const pathname = usePageViews();
   const { currentMenu } = useMenuStore();
+  const currentYear = useCurrentYear();
 
   useEffect(() => {
     const config = {
       params: {
         nation: pathname,
+        year: currentYear,
       },
     };
 
