@@ -276,7 +276,7 @@ const AdminPosters = () => {
             loading={applyOrderLoading}
           >
             <Stack flexDirection="row" alignItems="center">
-              <Stack>
+              <Stack sx={{ width: "43%" }}>
                 <Typography fontWeight={600} mb={2}>
                   &lt;Before&gt;
                 </Typography>
@@ -318,7 +318,7 @@ const AdminPosters = () => {
                   mx: 5,
                 }}
               />
-              <Stack>
+              <Stack sx={{ width: "43%" }}>
                 <Typography fontWeight={600} mb={2}>
                   &lt;After&gt;
                 </Typography>
