@@ -723,11 +723,11 @@ export const globalData = new Map<string, Common.globalDataType>([
 
       // Event 종료 후 데이터
       isEventEnded: true,
-      // postEventHighlightSubtitle: "Highlight Video",
-      // postEventHighlightTitle: "A look back at the NSFE 2023",
-      // postEventHighlightDesc:
-      //   "Once more the NANOscientific Forum Europe brought together members of the SPM community from all over Europe. This year’s host location, the ICFO in beautiful Barcelona, provided the perfect backdrop for 2.5 days of high-quality scientific presentations, insightful hands-on sessions on Park Systems AFMs, and social networking. Watch the video the experience some of the highlights.",
-      // postEventHighlightVideoURL: "https://www.youtube.com/watch?v=mZ3U5gum1_c",
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "A look back at the NSFE 2023",
+      postEventHighlightDesc:
+        "Once more the NANOscientific Forum Europe brought together members of the SPM community from all over Europe. This year’s host location, the ICFO in beautiful Barcelona, provided the perfect backdrop for 2.5 days of high-quality scientific presentations, insightful hands-on sessions on Park Systems AFMs, and social networking. Watch the video the experience some of the highlights.",
+      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=sEzHHKy5U8E",
       postEventGalleryTitle: "On-site impressions",
       postEventGalleryImageList: [
         `${S3_URL}/upload/eu/landing/2023NSFE_gallery_01.jpg`,
