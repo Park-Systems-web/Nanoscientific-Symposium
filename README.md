@@ -1,5 +1,3 @@
-
-
 <div id="top"></div>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -112,7 +110,6 @@ etc
 <code><img width="60" height="60" src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg"></code>
 <code><img width="60" height="60" src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg"></code>
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -121,61 +118,61 @@ etc
 
 ### convention
 
--   Coding Convention
+- Coding Convention
 
 1. React folder Structure
-    ```txt
-    /SomeComponent or page folder
-    ├── SomeComponent.tsx
-    └── SomeComponentStyles.tsx
-    /SomeComponent2 or page folder
-    ├── SomeComponent2.tsx
-    └── SomeComponen2tStyles.tsx
-    ```
+   ```txt
+   /SomeComponent or page folder
+   ├── SomeComponent.tsx
+   └── SomeComponentStyles.tsx
+   /SomeComponent2 or page folder
+   ├── SomeComponent2.tsx
+   └── SomeComponen2tStyles.tsx
+   ```
 2. prettier
-    ```txt
-    {
-      "singleQuote": false,
-      "semi": true,
-      "useTabs": false,
-      "tabWidth": 2,
-      "trailingComma": "all",
-      "printWidth": 80,
-      "arrowParens": "always"
-    }    
-    ```
 
-3. Camel Case 
+   ```txt
+   {
+     "singleQuote": false,
+     "semi": true,
+     "useTabs": false,
+     "tabWidth": 2,
+     "trailingComma": "all",
+     "printWidth": 80,
+     "arrowParens": "always"
+   }
+   ```
 
-    ```ts
-    lectureHall
-    lastName
-    ```
+3. Camel Case
+
+   ```ts
+   lectureHall;
+   lastName;
+   ```
 
 4. styled-components 구조: 최상위 태그에만 한 번
 
-    ```ts
-    const StyledTag = styled.div``;
+   ```ts
+   const StyledTag = styled.div``;
 
-    return (
-        <StyledTag>
-            <div>Not</div>
-            <div>There</div>
-        </StyledTag>
-    );
-    ```
+   return (
+     <StyledTag>
+       <div>Not</div>
+       <div>There</div>
+     </StyledTag>
+   );
+   ```
 
 5. 타입 관리
 
--   전역적으로 재사용될 타입: `src/@types/index.d.ts`에서 `declare`하여 정리(import, export 필요 없음)
--   단 하나의 컴포넌트에만 쓰이는 타입은 해당 파일 내부에 선언해도 무관
--   타입 선언 방식: interface(대부분의 타입) + type alias(원시 타입)
-
+- 전역적으로 재사용될 타입: `src/@types/index.d.ts`에서 `declare`하여 정리(import, export 필요 없음)
+- 단 하나의 컴포넌트에만 쓰이는 타입은 해당 파일 내부에 선언해도 무관
+- 타입 선언 방식: interface(대부분의 타입) + type alias(원시 타입)
 
 ### Commit Convention
 
 feat: 새로운 기능에 대한 커밋  
-content: 내용 
+content: 내용
 design: UI 수정 및 구현에 대한 커밋
 fix: 버그 수정에 대한 커밋  
 build: 빌드 관련 파일 수정에 대한 커밋  
@@ -184,48 +181,51 @@ docs: README.md 수정에 대한 커밋
 style: 코드 스타일 혹은 포맷 등에 관한 커밋(prettier 등)  
 refactor: 코드 리팩토링에 대한 커밋
 
-
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 
--   npm
-    ```sh
-    npm install npm@latest -g
-    ```
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-    ```sh
-    git clone https://github.com/Park-Systems-web/Nanoscientific-Symposium.git
-    ```
-3. Install NPM packages both client and server
-    ```sh
-    npm install
-    ```
-4. Enter your API in .env sholud be included both client and server folder
-    ```js
-      client/.env
-      
-      API_KEY is secret
-    ```
-    
-    ```js
-      server/.env
-      
-      API_KEY is secret
-    ```
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Park-Systems-web/Nanoscientific-Symposium.git
+   ```
+1. Install NPM packages both client and server
+   ```sh
+   npm install
+   ```
+1. `.env*` and `database.json` should be included in client and server folder
+
+   ```js
+     client/.env*
+   ```
+
+   ```js
+     server/.env*
+     server/database.json
+   ```
+
+1. Go to server directory then hit the command
+
+   ```sh
+   # Global Page
+   npm run dev
+
+   # Chinese Page
+   npm run dev-cn
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-
-
-
 
 <!-- CONTRIBUTING -->
 
@@ -244,15 +244,13 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
 
 ## Contact
 
-Eric Kim  - [GitHub](https://github.com/rnintai) - eric.kim@parksystems.com
+Eric Kim - [GitHub](https://github.com/rnintai) - eric.kim@parksystems.com
 
-Chanhyuk Park  - [GitHub](https://github.com/ChanhyukPark-Tech) - chanhyuk-tech@kakao.com
+Chanhyuk Park - [GitHub](https://github.com/ChanhyukPark-Tech) - chanhyuk-tech@kakao.com
 
 Project Link: [NanoScientific Symposium !!!](https://github.com/Park-Systems-web/Nanoscientific-Symposium)
 
@@ -264,14 +262,14 @@ Project Link: [NanoScientific Symposium !!!](https://github.com/Park-Systems-web
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
--   [Choose an Open Source License](https://choosealicense.com)
--   [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
--   [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
--   [Malven's Grid Cheatsheet](https://grid.malven.co/)
--   [Img Shields](https://shields.io)
--   [GitHub Pages](https://pages.github.com)
--   [Font Awesome](https://fontawesome.com)
--   [React Icons](https://react-icons.github.io/react-icons/search)
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+- [Malven's Grid Cheatsheet](https://grid.malven.co/)
+- [Img Shields](https://shields.io)
+- [GitHub Pages](https://pages.github.com)
+- [Font Awesome](https://fontawesome.com)
+- [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -292,16 +290,16 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
 
-
 ### Command
 
-`Nginx restart` 
+`Nginx restart`
+
 ```
 sudo service nginx restart
 ```
 
 `Server restart` should be inside in server folder
+
 ```
 sudo forever restart index.js
 ```
-
