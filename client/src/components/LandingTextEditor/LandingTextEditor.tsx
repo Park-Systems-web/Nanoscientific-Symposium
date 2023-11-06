@@ -80,7 +80,16 @@ const LandingTextEditor = ({
       {isEditor && edit ? (
         <>
           <QuillEditor value={value} setValue={setValue} />
-          <Box sx={{ textAlign: "right", my: 2 }}>
+          <Box
+            sx={{
+              textAlign: "right",
+              my: 2,
+              position: "relative",
+              zIndex: 5,
+              padding: "10px 0",
+              background: "white",
+            }}
+          >
             <Button onClick={resetHandler} variant="outlined" size="small">
               Reset
             </Button>
