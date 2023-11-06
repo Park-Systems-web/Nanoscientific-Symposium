@@ -4,11 +4,14 @@ const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
 const mysql = require("mysql2/promise");
 
+const runningEnv = process.env.NODE_ENV || "development";
+const PORT = runningEnv === "production" ? conf.port : "3308";
+
 const commonPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "common",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -20,7 +23,7 @@ const asiaPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "asia",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -32,7 +35,7 @@ const koreaPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "korea",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -43,7 +46,7 @@ const japanPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "japan",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -54,7 +57,7 @@ const usPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "us",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -65,7 +68,7 @@ const europePool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "europe",
   connectionLimit: 30,
   enableKeepAlive: true,
@@ -76,7 +79,7 @@ const chinaPool = mysql.createPool({
   host: conf.host,
   user: conf.user,
   password: conf.password,
-  port: conf.port,
+  port: PORT,
   database: "china",
   connectionLimit: 30,
   enableKeepAlive: true,
