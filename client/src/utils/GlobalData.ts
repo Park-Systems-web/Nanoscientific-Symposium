@@ -265,6 +265,32 @@ export const globalData = new Map<string, Common.globalDataType>([
       // pdf upload
       pdfUploadDescription:
         "Upload file (.pdf,.docx,.pptx) (Maximum size: 15MB)",
+      // Event 종료 후 데이터
+      isEventEnded: true,
+      // postEventHighlightSubtitle: "Highlight Video",
+      // postEventHighlightTitle: "A look back at the NSS Asia 2023",
+      // postEventHighlightDesc: "",
+      // postEventHighlightVideoURL: "https://www.youtube.com/watch?v=sEzHHKy5U8E",
+      postEventGalleryTitle: "On-site impressions",
+      postEventGalleryImageList: [
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_01.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_02.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_03.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_04.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_05.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_06.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_07.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_08.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_09.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_10.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_11.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_12.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_13.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_14.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_15.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_16.jpg`,
+        `${S3_URL}/upload/asia/landing/NSSA_Highlight_17.jpg`,
+      ],
     },
   ],
   [
@@ -724,7 +750,7 @@ export const globalData = new Map<string, Common.globalDataType>([
       // Event 종료 후 데이터
       isEventEnded: true,
       postEventHighlightSubtitle: "Highlight Video",
-      postEventHighlightTitle: "A look back at the NSFE 2023",
+      postEventHighlightTitle: "A look back at the NSF Europe 2023",
       postEventHighlightDesc:
         "Once more the NANOscientific Forum Europe brought together members of the SPM community from all over Europe. This year’s host location, the ICFO in beautiful Barcelona, provided the perfect backdrop for 2.5 days of high-quality scientific presentations, insightful hands-on sessions on Park Systems AFMs, and social networking. Watch the video the experience some of the highlights.",
       postEventHighlightVideoURL: "https://www.youtube.com/watch?v=sEzHHKy5U8E",
@@ -938,6 +964,37 @@ export const globalData = new Map<string, Common.globalDataType>([
       pdfUploadDescription:
         "Upload file (.pdf,.docx,.pptx) (Maximum size: 15MB)",
       uploadBtnText: "Upload",
+
+      // Event 종료 후 데이터
+      isEventEnded: true,
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "2023年第五届中国纳米科学论坛精彩回顾",
+      postEventHighlightDesc:
+        "2023年第五届中国纳米科学论坛主要围绕先进原子力探针显微技术方法、功能模式及其在半导体材料与器件、新型功能材料（包括铁电、多铁等）、二维原子晶体材料（包括异质结、莫尔超结构等）、能源材料与器件（包括锂电池、光伏材料等）等方面的应用开展了学术交流。",
+      postEventHighlightVideoURL:
+        "//player.bilibili.com/player.html?aid=323567100&bvid=BV1Sw411H7MU&cid=1335039326&p=1",
+      postEventGalleryTitle: "会议现场回顾",
+      postEventGalleryImageList: [
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_01.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_02.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_03.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_04.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_05.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_06.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_07.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_08.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_09.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_10.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_11.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_12.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_13.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_14.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_15.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_16.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_17.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_18.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_19.jpg`,
+      ],
     },
   ],
   [
@@ -998,6 +1055,37 @@ export const globalData = new Map<string, Common.globalDataType>([
       pdfUploadDescription:
         "Upload file (.pdf,.docx,.pptx) (Maximum size: 15MB)",
       uploadBtnText: "Upload",
+
+      // Event 종료 후 데이터
+      isEventEnded: true,
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "2023年第五届中国纳米科学论坛精彩回顾",
+      postEventHighlightDesc:
+        " 2023年第五届中国纳米科学论坛主要围绕先进原子力探针显微技术方法、功能模式及其在半导体材料与器件、新型功能材料（包括铁电、多铁等）、二维原子晶体材料（包括异质结、莫尔超结构等）、能源材料与器件（包括锂电池、光伏材料等）等方面的应用开展了学术交流。",
+      postEventHighlightVideoURL:
+        "//player.bilibili.com/player.html?aid=323567100&bvid=BV1Sw411H7MU&cid=1335039326&p=1",
+      postEventGalleryTitle: "会议现场回顾",
+      postEventGalleryImageList: [
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_01.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_02.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_03.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_04.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_05.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_06.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_07.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_08.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_09.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_10.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_11.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_12.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_13.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_14.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_15.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_16.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_17.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_18.jpg`,
+        `${CHINA_S3_URL}/common/landing/NSSC_Highlight_19.jpg`,
+      ],
     },
   ],
 ]);
