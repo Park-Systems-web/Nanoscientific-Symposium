@@ -169,6 +169,12 @@ const AdminPrograms = ({ concurrent }: ProgramListProps) => {
     getSessions();
   }, []);
 
+  useEffect(() => {
+    if (selectedTimezone === "Europe/Berlin") {
+      setSelectedTimeZoneOffset("+1:00");
+    }
+  }, [selectedTimezone, selectedTimeZoneOffset]);
+
   if (programLoading || sessionLoading) {
     return <Loading />;
   }
