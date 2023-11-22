@@ -43,7 +43,7 @@ const ProgramsList = ({ concurrent }: ProgramListProps) => {
   );
   const [selectedTimeZoneOffset, setSelectedTimeZoneOffset] = useState<string>(
     new Date()
-      .toLocaleString("sv-SE", {
+      .toLocaleDateString("sv-SE", {
         timeZone: selectedTimezone,
         timeZoneName: "short",
       })
