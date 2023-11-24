@@ -13,5 +13,6 @@ const patchEditOnDemandListDto ={
 };
 const postOnDemandApplicationDto = {
     application: ""
+
 };
 module.exports = {patchEditOnDemandListDto,postOnDemandApplicationDto}
