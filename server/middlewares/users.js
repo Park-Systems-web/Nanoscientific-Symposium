@@ -1,4 +1,4 @@
-const { getCurrentPool } = require("../utils/getCurrentPool");
+const { getCurrentPool } = require("../common/utils/getCurrentPool");
 const {
   verifyToken,
   issueAccessToken,
@@ -6,7 +6,7 @@ const {
   issueAccessTokenByYear,
   issueRefreshTokenByYear,
   compareRefreshToken,
-} = require("../utils/jwt");
+} = require("../common/utils/jwt");
 
 // 유저 검증 연도별로 할지, 관계없이 할지 여부
 const useYearList = ["eu"];
@@ -77,7 +77,7 @@ module.exports = {
       //   WHERE email="${accessToken.email}"
       //   AND refresh_token="${req.cookies.refreshToken}";`;
       // } else {
-      sql = `SELECT 
+      sql = `SELECT
       id,
       email,
       role,

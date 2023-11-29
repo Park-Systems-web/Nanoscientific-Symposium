@@ -1,9 +1,9 @@
-const { getCurrentPool } = require("../utils/getCurrentPool");
+const { getCurrentPool } = require("../common/utils/getCurrentPool");
 const {
   issueZoomToken,
   issueZoomTokenOAuth,
   checkZoomTokenExpired,
-} = require("../utils/jwt");
+} = require("../common/utils/jwt");
 
 const zoomMiddle = {
   getZoomToken: async (req, res, next) => {
