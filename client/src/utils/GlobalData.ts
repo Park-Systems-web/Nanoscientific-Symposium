@@ -267,11 +267,11 @@ export const globalData = new Map<string, Common.globalDataType>([
         "Upload file (.pdf,.docx,.pptx) (Maximum size: 15MB)",
       // Event 종료 후 데이터
       isEventEnded: true,
-      // postEventHighlightSubtitle: "Highlight Video",
-      // postEventHighlightTitle: "A look back at the NSS Asia 2023",
-      // postEventHighlightDesc:
-      //   "This time India witnessed the greatest NANOscientific Symposium of Asia. 2023 NSS Asia organized in hybrid mode, for the venue IISC, Bangalore hosted this time. It was a one-day event with various nanotechnology-related talks, AFM live demo sessions, and poster presentations. Watch the video to experience some of the highlights of the event.",
-      // postEventHighlightVideoURL: "https://www.youtube.com/watch?v=",
+      postEventHighlightSubtitle: "Highlight Video",
+      postEventHighlightTitle: "A look back at the NSS Asia 2023",
+      postEventHighlightDesc:
+        "This time India witnessed the greatest NANOscientific Symposium of Asia. 2023 NSS Asia organized in hybrid mode, for the venue IISC, Bangalore hosted this time. It was a one-day event with various nanotechnology-related talks, AFM live demo sessions, and poster presentations. Watch the video to experience some of the highlights of the event.",
+      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=tiiVjMlTuqk",
       postEventGalleryTitle: "On-site impressions",
       postEventGalleryImageList: [
         `${S3_URL}/upload/asia/landing/NSSA_Highlight_01.jpg`,
@@ -545,7 +545,7 @@ export const globalData = new Map<string, Common.globalDataType>([
       postEventHighlightTitle: "ナノ科学シンポジウム2023 ハイライト映像",
       postEventHighlightDesc:
         "第4回目を迎えたナノ科学シンポジウム2023では、AFMによる粘弾性計測やナノインデンテーション、SPMによる全固体電池の評価等、各分野で活躍している著名人による講演や、30名以上の発表者によるポスターセッションが行われました。オンラインからも沢山の方にご参加いただき、大盛況のうちに終えることが出来ました。会場の様子をハイライト映像でぜひご覧ください。",
-      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=f-nHjkNEl9k",
+      postEventHighlightVideoURL: "https://www.youtube.com/watch?v=QZ6H29T4hSg",
       // postEventGalleryTitle: "イベントの様子",
       // postEventGalleryImageList: [
       //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_01.jpg`,
