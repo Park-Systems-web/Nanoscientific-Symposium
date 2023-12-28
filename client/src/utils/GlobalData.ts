@@ -554,7 +554,6 @@ export const globalData = new Map<string, Common.globalDataType>([
         `${S3_URL}/upload/jp/landing/NSSJ_Highlight_04.jpg`,
         `${S3_URL}/upload/jp/landing/NSSJ_Highlight_05.jpg`,
         `${S3_URL}/upload/jp/landing/NSSJ_Highlight_06.jpg`,
-        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_07.jpg`,
       ],
     },
   ],
