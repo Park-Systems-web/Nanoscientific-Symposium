@@ -546,18 +546,16 @@ export const globalData = new Map<string, Common.globalDataType>([
       postEventHighlightDesc:
         "第4回目を迎えたナノ科学シンポジウム2023では、AFMによる粘弾性計測やナノインデンテーション、SPMによる全固体電池の評価等、各分野で活躍している著名人による講演や、30名以上の発表者によるポスターセッションが行われました。オンラインからも沢山の方にご参加いただき、大盛況のうちに終えることが出来ました。会場の様子をハイライト映像でぜひご覧ください。",
       postEventHighlightVideoURL: "https://www.youtube.com/watch?v=QZ6H29T4hSg",
-      // postEventGalleryTitle: "イベントの様子",
-      // postEventGalleryImageList: [
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_01.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_02.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_03.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSgSK_Higlight_04.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_05.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_06.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_07.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_08.jpg`,
-      //   `${S3_URL}/upload/kr/landing/NSSK_Higlight_09.jpg`,
-      // ],
+      postEventGalleryTitle: "イベントの様子",
+      postEventGalleryImageList: [
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_01.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_02.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_03.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_04.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_05.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_06.jpg`,
+        `${S3_URL}/upload/jp/landing/NSSJ_Highlight_07.jpg`,
+      ],
     },
   ],
   [
