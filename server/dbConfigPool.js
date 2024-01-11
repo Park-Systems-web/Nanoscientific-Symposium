@@ -5,7 +5,8 @@ const conf = JSON.parse(data);
 const mysql = require("mysql2/promise");
 
 const runningEnv = process.env.NODE_ENV || "development";
-const PORT = runningEnv === "production" ? conf.port : "3308";
+// const PORT = runningEnv === "production" ? conf.port : "3308";
+const PORT = "3306";
 
 const commonPool = mysql.createPool({
   host: conf.host,
