@@ -422,8 +422,9 @@ const App = () => {
         .finally(() => {
           setMenuStateLoading(false);
         });
-
-      getConfig();
+      if (pathname !== "common") {
+        getConfig();
+      }
     }
   }, [pathname]);
 
