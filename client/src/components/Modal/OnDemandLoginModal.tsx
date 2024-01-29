@@ -37,7 +37,7 @@ interface OnDemandLoginModalProps {
   setLoginFailed: Dispatch<SetStateAction<boolean>>;
 }
 
-const currentYear = `${new Date().getFullYear()}`;
+const currentYear = `2023`;
 
 const OnDemandLoginModal = (props: OnDemandLoginModalProps) => {
   const { currentNation, setCurrentNation } = useAdminStore();
