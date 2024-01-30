@@ -174,7 +174,7 @@ const ProgramContent = ({
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    visibility: !isAdmin && isPrevParallel ? "hidden" : "visible",
+    display: !isAdmin && isPrevParallel ? "none" : "table-row",
     cursor: isAdmin ? "pointer" : "default",
     td: {
       // lineHeight: "2.2",
