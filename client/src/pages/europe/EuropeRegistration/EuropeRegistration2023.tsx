@@ -127,8 +127,8 @@ const EuropeRegistration2023 = ({ isStudent = false, init = false }: props) => {
   const getIsRegistrationEnded = async () => {
     try {
       const res = await axios.get("/api/page/eu/registration-ended");
-      setIsRegistrationEnded(res.data.result);
-      console.log(res.data.result);
+      // setIsRegistrationEnded(res.data.result);
+      setIsRegistrationEnded(false);
     } catch (error) {
       console.log(error);
     } finally {
